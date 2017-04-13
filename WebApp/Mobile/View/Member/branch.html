@@ -1,0 +1,72 @@
+﻿<include file="Public:header"/>
+
+<div class="redpacket-group">
+
+	<div class="header-all">
+
+		<div class="com-header">
+
+			<a class="back-a" href="{:U('Member/index')}"><i class="head-icon-back">&#xe609;</i></a>我的团队
+
+		</div>
+
+		<div class="dt-top"></div>
+
+	</div>
+
+	<header>
+
+		<h2><i class="iconfont">&#xe607;</i>我的团队</h2>
+
+		<em>{$branch_num}</em>人<br/>
+
+		<notempty name="parent_member">
+			<h2>
+				<notempty name="parent_member['wechat']">
+					[微信号]{$parent_member['nickname']}
+				</notempty>
+				<notempty name="parent_member['mobile']">
+					[手机号]{$parent_member['mobile']}
+				</notempty>
+					[会员等级]{$parent_member['member_id']|get_member_agent_name}
+			</h2>
+		</notempty>
+
+	</header>
+
+
+
+	<div class="container">
+
+		<ul>
+
+			<volist name="list" id="vo">
+				<!-- 新增 -->
+				<li>
+					<i class="iconfont">&#xe606;</i>
+					<p>昵称：<span>{:$vo['nickname'] ? $vo['nickname'] : '未填写'}</span></p>
+					<p>手机号码：<span>{:$vo['mobile'] ? $vo['mobile'] : '未填写'}</span></p>
+					<p>微信号：<span>{:$vo['wechat'] ? $vo['wechat'] : '未填写'}</span></p>
+					<p>会员等级：<span>{$vo['member_id']|get_member_agent_name}</span></p>
+					<p>排单状态：<span>
+						<if condition="$vo['active_loan_count'] == 0">
+							未排单
+						<else/>
+							排单中
+						</if>
+					</span></p>
+					<em class="red">{$vo['branch_num']}({$vo['agent_member_num']})</em>
+				</li>
+
+			</volist>
+
+		</ul>
+
+	</div>
+
+	<!-- flexd nav -->
+	{:W('Menu/footer_nav')}
+
+</div>
+
+<include file="Public:footer"/>

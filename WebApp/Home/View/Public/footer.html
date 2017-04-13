@@ -1,0 +1,87 @@
+<div class="footer">
+    <div class="all">
+        <div class="footer1">
+            <div class="footer1-1">
+                <ul>
+                    <li>
+                        <span>关于我们</span>
+                        <span><a href="{:U('Article/about_us')}" class="f-c">关于我们</a></span>
+                        <span><a href="{:U('Article/moive')}" class="f-c">官方视频</a></span>
+                        <span><a href="{:U('Article/term')}" class="f-c">网站服务条例</a></span>
+                        <span><a href="{:U('Article/service')}" class="f-c">用户服务协议</a></span>
+                        <span><a href="" class="f-c">收藏本站</a></span>
+                        <span><a href="" class="f-c">联系我们</a></span>
+                    </li>
+                    <li>
+                        <span>购物指南</span>
+                        <span><a href="{:U('Article/guide')}" class="f-c">新手指南</a></span>
+                        <span><a href="{:U('Order/index')}" class="f-c">订单查询</a></span>
+                        <span><a href="{:U('Article/member')}" class="f-c">会员介绍</a></span>
+                        <span><a href="{:U('Article/point')}" class="f-c">积分攻略</a></span>
+                        <span><a href="{:U('Help/index')}" class="f-c">帮助中心</a></span>
+                    </li>
+                    <li>
+                        <span>消费者保障</span>
+                        <span><a href="" class="f-c">新手指南</a></span>
+                        <span><a href="" class="f-c">订单查询</a></span>
+                        <span><a href="" class="f-c">会员介绍</a></span>
+                        <span><a href="" class="f-c">积分攻略</a></span>
+                        <span><a href="" class="f-c">帮助中心</a></span>
+                    </li>
+                    <li>
+                        <span>商务合作</span>
+                        <span><a href="" class="f-c">商家报名</a></span>
+                        <span><a href="" class="f-c">友情链接</a></span>
+                        <span><a href="" class="f-c">廉政举报</a></span>
+                    </li>
+                    <li>
+                        <span>扫码关注微信</span>
+                        <div>
+                            <img src="__IMG__/微信.png" alt="" width="120px" height="120px">
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <notempty name="links">
+            <div class="friendlink">
+                <span>友情链接:</span>
+                <volist name="links" id="vo">
+                    <span><a href="{$vo['site_url']}">{$vo['site_name']}</a></span>
+                </volist>
+            </div>
+        </notempty>
+        <div class="center">
+            <div class="footer-text">
+                <p>京ICP证120075号  京ICP备10051110号-5  京公网安备11010502025623  营业执照110105013673175  食品流通许可证SP1101051510352397 </p>
+                <p>出版物经营许可证 新出发京零字第朝160018号  Copyright©2011-2015 版权所有 ZHE800.COM </p>
+            </div>
+
+            <div class="footer-image">
+                <img src="__IMG__/footer.png" alt="" width="200px;">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $(".weixin1").hover(function () {
+            $(".wx1").toggle();
+        });
+    });
+
+    $(function () {
+        $('.banner').unslider({
+            dots: true,
+            keys: true,
+        });
+    });
+    $(function () {
+        $(".showcase2").hover(function () {
+            $(this).children('.sc-e').toggle();
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,106 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	{$seo}
+	<link rel="stylesheet" href="__CSS__/style.css">
+	<script src="__JS__/jquery-1.11.3.min.js"></script>
+<body>
+<div class="personal-group">
+	<div class="header-all">
+		<div class="com-header">
+			<a class="back-a" href="{:U('Member/index')}"><i class="head-icon-back">&#xe609;</i></a>个人中心
+		</div>
+		<div class="dt-top"></div>
+	</div>
+	<form method="post" id="mainForm" enctype="multipart/form-data">
+		<div class="input-group">
+			<div class="input-style"><label>昵称</label><input type="text" name="nickname" value="{$user_info['nickname']}" placeholder="请输入您的昵称"></div>
+			<div class="input-style"><label>姓名</label><input type="text" name="member_name" value="{$user_info['member_name']}" placeholder="请输入您的真实姓名"></div>
+			<!--<div class="input-style"><label>密码</label><input type="password" name="pwd" value="{$user_info['pwd']}" placeholder="请输入密码"></div>-->
+			<div class="input-style"><label>性别</label>
+				<input type="radio" name="gender" <if condition="$user_info['gender'] == 1">checked="checked"</if> value="1">男
+				<input type="radio" name="gender" <if condition="$user_info['gender'] == 2">checked="checked"</if> value="2">女
+				<input type="radio" name="gender" <if condition="$user_info['gender'] == 0">checked="checked"</if> value="0">保密
+			</div>
+			<!--<div class="input-style">
+				<label>选择省</label>
+				<select name="province" id="province" onchange="getDistrict($('#province').val())">
+					<option value="">请选择</option>
+					<volist name="province" id="vo">
+						<option value="{$vo['id']}">{$vo['name']}</option>
+					</volist>
+				</select>
+			</div>
+			<div class="input-style">
+				<label>选择市</label>
+				<select name="city" id="city" onchange="getDistrict($('#city').val())">
+					<option value="">请选择</option>
+				</select>
+			</div>
+			<div class="input-style">
+				<label>选择区</label>
+				<select name="area" id="area" onchange="getDistrict($('#area').val())">
+					<option value="">请选择</option>
+				</select>
+			</div>-->
+			<div class="input-style"><label>头像</label><input type="file" name="avatar" value="{$user_info['avatar']}"></div>
+			<div class="input-style"><label>微信</label><input type="text" name="wechat" value="{$user_info['wechat']}" placeholder="请输入您的微信号"></div>
+			<div class="input-style"><label>支付宝</label><input type="text" name="alipay" value="{$user_info['alipay']}" placeholder="请输入您的支付宝账号"></div>
+			<div class="btn_area">
+				 <a class="btn_primary" href="JavaScript:submitForm();">保存资料</a>
+			</div>
+		</div>
+	</form>
+	<!-- flexd nav -->
+	{:W('Menu/footer_nav')}
+</div>
+<script>
+function submitForm()
+{
+	$('#mainForm').submit();
+}
+
+$("#province").change(function(){
+	var id = $("#province option:selected").val();
+	getCity(id); //  获取城市数据
+});
+
+$("#city").change(function(){
+	var id = $("#city option:selected").val();
+	getDisctrict(id);
+});
+
+function getCity(id){
+	var URL="{:U('getDisctrict')}";
+	var data={"id":id};
+	$.post(URL,data,function(res){
+		$("#city option").remove();
+		for(var i=0; i<res.city.length;i++)
+		{
+			var c = $("<option value="+res.city[i].id+">"+res.city[i].name+"</option>");
+			$("#city").append(c);
+		}
+	},"json");
+}
+
+function getDisctrict(id){
+    var URL="{:U('getDisctrict')}";
+	var data={"id":id};
+	$.post(URL,data,function(res){
+		$("#area option").remove();
+		for(var i=0; i<res.area.length;i++)
+		{
+			var c = $("<option value="+res.area[i].id+">"+res.area[i].name+"</option>");
+			$("#area").append(c);
+		}
+	},"json");
+}
+
+
+
+// getCity();
+
+</script>
+<include file="Public:footer"/>

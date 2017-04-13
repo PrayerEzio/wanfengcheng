@@ -1,0 +1,44 @@
+<include file="Public:header"/>
+<body>
+<div class="login">
+    <div class="logo2">
+        <a href="{:U('Index/index')}"><img src="__IMG__/logo.jpg" alt="" width="250px" height="100px"></a>
+    </div>
+    <div class="clear"></div>
+    <div class="login-bg">
+        <div class="login-widows">
+            <div class="login-a">
+                <h2>密码登录</h2>
+                <form action="" method="post">
+                    <div class="admin">
+                        <label for="admin-user" class="user-mas">
+                            <i class="icon-user icon-2x"></i></label>
+                        <input type="text" name="account" class="admin-name" placeholder="会员名/手机号/邮箱" id="admin-user">
+                    </div>
+                    <div class="admin">
+                        <label for="admin-password" class="user-mas">
+                            <i class="icon-lock icon-2x"></i></label>
+                        <input type="password" name="pwd" class="admin-name" id="admin-password">
+                    </div>
+                    <button type="submit" data-ing="正在登录..." class="admin-buttom">登 录</button>
+                </form>
+                <div class="another-login">
+                    <a href="">
+                        <i class="taobao" ></i>
+                        <span>淘宝登录</span>
+                    </a>
+                    <a href="">
+                        <i class="qq"></i>
+                        <span>QQ登录</span>
+                    </a>
+                </div>
+                <div class="clear"></div>
+                <div class="ad-forgot">
+                    <a href="{:U('Login/forgot')}">忘记密码</a>
+                    <a href="{:U('Login/register')}">免费注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>

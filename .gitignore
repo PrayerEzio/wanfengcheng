@@ -1,0 +1,10 @@
+WebApp/Common/Conf/
+WebApp/Runtime/
+Uploads/
+.idea
+.vagrant
+Vagrantfile
+*.log
+*.bak
+*.pem
+Backup

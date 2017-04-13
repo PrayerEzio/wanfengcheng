@@ -1,0 +1,191 @@
+<include file="Public:header"/>
+<body>
+{:W('Nav/top')}
+<div><img src="__IMG__/b_banner.jpg" alt="" width="100%"></div>
+<div class="line"></div>
+<div class="all">
+    <div class="productlist">
+        <div class="productlist-1"><p class="p-p-w">{$goods_class['gc_name']}</p></div>
+        <div class="productlist-1 produtlist-choice">
+            <ul>
+                <a href="{:U('Goods/index',array('cate'=>$_GET['cate']))}">
+                    <li class="p-c-c">全部</li>
+                </a>
+                <volist name="goods_class['child']" id="vo">
+                    <a href="{:U('Goods/index',array('cate'=>$vo['gc_id']))}">
+                        <li>{$vo['gc_name']}</li>
+                    </a>
+                </volist>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div class="productlist-2 produtlist-choice-2">
+            <ul>
+                <a href="">
+                    <li>综合</li>
+                </a>
+                <li class="sorting">按销量排序
+                    <div class="sorting-1" style="display:none;">
+                        <a href=""><p>按销量最高</p></a>
+                        <a href=""><p>按销量最低</p></a>
+                    </div>
+                </li>
+                <li class="sorting">按价格排序
+                    <div class="sorting-1" style="display:none;">
+                        <a href=""><p>按价格最高</p></a>
+                        <a href=""><p>按价格最低</p></a>
+                    </div>
+                </li>
+                <a href="">
+                    <li>最新</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="all">
+    <div class="showcase2">
+        <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+        <a href=""><span class="sc-t-1">手机配饰</span></a>
+        <div class="clear"></div>
+        <div class="showcase-text">
+            <span><p class="sc-t-3">¥88</p></span>
+            <span class="sc-t-5">剩余9天</span>
+        </div>
+        <div class="sc-e" style="display:none;">
+            <span>包邮|</span>
+
+            <span>返积分</span>
+            <div class="collect">
+                <a href=""><i class="icon-star icon-star-2">收藏</i></a>
+                <a href="" class="sc-e-w">[详情]</a>
+            </div>
+        </div>
+    </div>
+    <div class="showcase2">
+        <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+        <a href=""><span class="sc-t-1">手机配饰</span></a>
+        <div class="clear"></div>
+        <div class="showcase-text">
+            <span><p class="sc-t-3">¥88</p></span>
+            <span class="sc-t-5">剩余9天</span>
+        </div>
+        <div class="sc-e" style="display:none;">
+            <span>包邮|</span>
+
+            <span>返积分</span>
+            <div class="collect">
+                <a href=""><i class="icon-star icon-star-2">收藏</i></a>
+                <a href="" class="sc-e-w">[详情]</a>
+            </div>
+        </div>
+    </div>
+    <div class="showcase2">
+        <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+        <a href=""><span class="sc-t-1">手机配饰</span></a>
+        <div class="clear"></div>
+        <div class="showcase-text">
+            <span><p class="sc-t-3">¥88</p></span>
+            <span class="sc-t-5">剩余9天</span>
+        </div>
+        <div class="sc-e" style="display:none;">
+            <span>包邮|</span>
+
+            <span>返积分</span>
+            <div class="collect">
+                <a href=""><i class="icon-star icon-star-2">收藏</i></a>
+                <a href="" class="sc-e-w">[详情]</a>
+            </div>
+        </div>
+    </div>
+    <div class="showcase2">
+        <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+        <a href=""><span class="sc-t-1">手机配饰</span></a>
+        <div class="clear"></div>
+        <div class="showcase-text">
+            <span><p class="sc-t-3">¥88</p></span>
+            <span class="sc-t-5">剩余9天</span>
+        </div>
+        <div class="sc-e" style="display:none;">
+            <span>包邮|</span>
+
+            <span>返积分</span>
+            <div class="collect">
+                <a href=""><i class="icon-star icon-star-2">收藏</i></a>
+                <a href="" class="sc-e-w">[详情]</a>
+            </div>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="showcase2">
+        <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+        <a href=""><span class="sc-t-1">手机配饰</span></a>
+        <div class="clear"></div>
+        <div class="showcase-text">
+            <span><p class="sc-t-3">¥88</p></span>
+            <span class="sc-t-5">剩余9天</span>
+        </div>
+        <div class="sc-e" style="display:none;">
+            <span>包邮|</span>
+
+            <span>返积分</span>
+            <div class="collect">
+                <a href=""><i class="icon-star icon-star-2">收藏</i></a>
+                <a href="" class="sc-e-w">[详情]</a>
+            </div>
+        </div>
+    </div>
+    <div class="showcase2">
+        <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+        <a href=""><span class="sc-t-1">手机配饰</span></a>
+        <div class="clear"></div>
+        <div class="showcase-text">
+            <span><p class="sc-t-3">¥88</p></span>
+            <span class="sc-t-5">剩余9天</span>
+        </div>
+        <div class="sc-e" style="display:none;">
+            <span>包邮|</span>
+
+            <span>返积分</span>
+            <div class="collect">
+                <a href=""><i class="icon-star icon-star-2">收藏</i></a>
+                <a href="" class="sc-e-w">[详情]</a>
+            </div>
+        </div>
+    </div>
+    <div class="showcase2">
+        <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+        <a href=""><span class="sc-t-1">手机配饰</span></a>
+        <div class="clear"></div>
+        <div class="showcase-text">
+            <span><p class="sc-t-3">¥88</p></span>
+            <span class="sc-t-5">剩余9天</span>
+        </div>
+        <div class="sc-e" style="display:none;">
+            <span>包邮|</span>
+
+            <span>返积分</span>
+            <div class="collect">
+                <a href=""><i class="icon-star icon-star-2">收藏</i></a>
+                <a href="" class="sc-e-w">[详情]</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="clear"></div>
+    <div class="all">
+        <div class="nextpage">
+            {$page}
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="advertisement">
+        <a href=""><img src="__IMG__/d-1.jpg" alt="" width="220px"></a>
+        <a href=""><img src="__IMG__/d-2.jpg" alt="" width="220px"></a>
+        <a href=""><img src="__IMG__/d-3.jpg" alt="" width="220px"></a>
+        <a href=""><img src="__IMG__/d-4.jpg" alt="" width="220px"></a>
+    </div>
+</div>
+<div class="clear"></div>
+<include file="Public:footer"/>

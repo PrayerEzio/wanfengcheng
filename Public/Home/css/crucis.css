@@ -1,0 +1,63 @@
+/* Crucis Page Css */
+div.crucis-page span,div.crucis-page a{
+    float: left;
+    margin-left: -1px;
+    text-decoration:none;
+    color: inherit;
+    border: 1px solid #d2d2d2;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    font-family: inherit;
+    color: inherit;
+    background: #fff;
+    border: 1px solid #e7eaec;
+}
+div.crucis-page div>:first-child{
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+div.crucis-page div>:last-child{
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+div.crucis-page a:hover{
+    color: inherit;
+    border: 1px solid #d2d2d2;
+}
+div.crucis-page a:active,div.crucis-page span.current{
+    box-shadow: 0 2px 5px rgba(0,0,0,.15)inset;
+}
+div.crucis-page span.current{
+    width: auto;
+    height:auto;
+    color: inherit;
+    border: 1px solid #d2d2d2;
+}
+div.crucis-page div{
+    margin: auto;
+    display: inline-block;
+    margin-top: 5px;
+}
+div.crucis-page {
+    text-align: center;
+    position: relative;
+    vertical-align: middle;
+    background: #fff;
+    margin-bottom: 5px;
+}
+/* Crucis Page Css */

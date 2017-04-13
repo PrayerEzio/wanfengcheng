@@ -1,0 +1,40 @@
+<include file="Public:header"/>
+<body>
+<div class="all">
+    <div class="logo2">
+        <a href="{:U('Index/index')}"><img src="__IMG__/logo.jpg" alt="" width="250px" height="100px"></a>
+    </div>
+    <p class="logo-signup">已有淘货吧账号了<a href="{:U('Login/index')}">去登录吧</a></p>
+    <div class="clear"></div>
+    <div class="signup-bg">
+        <form method="post" action="">
+            <div class="basicinformation">
+                <p class="b-phone"><span>手机号 :</span><input type="text" name="mobile" id="mobile" class="basicinformation-1"></p>
+                <p class="b-password"><span>密码 :</span><input type="password" name="pwd" class="basicinformation-1"></p>
+                <p><span>确认密码 :</span><input type="password" name="re_pwd" class="basicinformation-1"></p>
+                <p class="b-code"><span>验证码 :</span><input type="text" name="smscode" class="identifyingcode">
+                <a class="identifyingcode-1" onclick="sendSMS()">免费获取手机验证码</a></p>
+                <p class="b-checkbox"><input type="checkbox" checked="checked" ><a href="">我已经认真阅读并同意折800的用户注册协议</a></p>
+                <input type="hidden" name="s_class" value="mobile">
+                <button type="submit" class="identifyingcode-1 b-agree">同意协议并注册</button>
+            </div>
+            <div class="signup-photo">
+                <img src="__IMG__/zhuce.png" alt="" width="380px" height="250px">
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    function sendSMS(){
+        var URL = "{:U('sendSMS')}";
+        var mobile = $("#mobile").val();
+        var email = $("#email").val();
+        var s_class = $("#s_class").val();
+        var type = "register";
+        var data = {"mobile":mobile,"type":type,"email":email,"s_class":s_class};
+        $.post(URL,data,function(msg){
+            alert(msg);
+        });
+    }
+</script>
+<include file="Public:footer"/>

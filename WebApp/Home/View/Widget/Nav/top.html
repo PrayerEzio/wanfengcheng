@@ -1,0 +1,67 @@
+<div class="title">
+    <div class="all">
+        <div class="title-1">
+            <div>
+                <a href="{:U('Login/index')}"><span>登录</span></a>
+            </div>
+            <div>
+                <a href="{:U('Login/register')}"><span>注册</span></a>
+            </div>
+            |
+            <div>
+                <span>签到好礼</span>
+            </div>
+            |
+            <div>
+					<span class="weixin1">关注微信
+					</span>
+
+            </div>
+            |
+            <div><i class="icon-shopping-cart"></i><span>购物车 0</span></div>
+            |
+            <div><a href=""><span>帮助中心</span></a></div>
+            |
+            <div><a href=""><span>卖家中心</span></a></div>
+        </div>
+        <div class="wx1"  style="display:none;">
+            <img src="image/微信.png" alt="" width="100px;" height="100px;">
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="logosearchbg">
+    <div class="all">
+        <div class="logo">
+            <a href=""><img src="__UPLOADS__/{:MSC('site_logo')}" alt="" width="200px" height="70px"></a>
+        </div>
+        <div class="navigationbar">
+            <ul>
+                <a href="{:U('Index/index')}" <if condition="CONTROLLER_NAME == 'Index'">class="colorstyle"</if>>
+                    <li>首页</li>
+                </a>
+                <volist name="goods_class" id="vo">
+                    <a href="{:U('Goods/index',array('cate'=>$vo['gc_id']))}" <if condition="$gc_id == $vo['gc_id'] || $goods['top_gc_id'] == $vo['gc_id']">class="colorstyle"</if>>
+                        <li>{$vo['gc_name']}</li>
+                    </a>
+                </volist>
+                <a href="">
+                    <li>外卖</li>
+                </a>
+                <a href="">
+                    <li>商城返利</li>
+                </a>
+            </ul>
+        </div>
+        <div class="search">
+            <div class="search-text">
+                <form action="" method="get">
+                    <input type="search" placeholder="搜索立减" name="" class="search-1">
+                    <div class="searchicon">
+                        <a href=""><i class="icon-search icon-2x"></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

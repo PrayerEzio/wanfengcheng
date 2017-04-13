@@ -1,0 +1,12 @@
+@charset "utf-8";
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+.friend{height:225px;overflow:hidden;width:830px;border: 1px #999 solid; float: left;}
+.mr_frbox{height:223px;}
+.mr_frBtnL{cursor:pointer;display:inline;float:left;height:46px;margin:90px 10px 0 0;width:28px;}
+.mr_frUl{float:left;height:180px;width:750px;margin-left:10px;}
+.mr_frBtnR{float:right;margin-top:90px;cursor:pointer;width:28px;height:46px;}
+.mr_frUl ul li{display:inline;float:left;height:223px;width:180px;overflow:hidden;position:relative;border:1px solid #eee;}
+.mr_frUl ul li:hover{border:1px solid red;}
+.mr_frUl ul li a img{/*display:block;*/width:100%;}
