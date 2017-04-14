@@ -1,13 +1,14 @@
 <include file="Public:header"/>
 <body>
 {:W('Nav/top')}
-<div class="clear"></div>
-<div class="line"></div>
 <div class="banner">
     <ul>
         <volist name="banner" id="vo">
-            <li><a href="{$vo['ap_link']}" target="_blank"><img src="__UPLOADS__/{$vo['ap_pic']}" alt=""
-                                                                width="100%"></a></li>
+            <li>
+                <a href="{$vo['ap_link']}" target="_blank">
+                    <img src="__UPLOADS__/{$vo['ap_pic']}" alt="" width="100%">
+                </a>
+            </li>
         </volist>
     </ul>
 </div>
@@ -201,57 +202,28 @@
     </div>
 </div>
 <div class="clear"></div>
-<div id="wrapper">
-    <div id="slider">
-        <img class="scrollButtons left" src="__IMG__/leftarrow.png">
-        <div style="overflow: hidden;" class="scroll">
-            <div class="scrollContainer">
-                <div class="panel" id="panel_1">
-                    <div class="inside">
-                        <img src="__IMG__/1.jpg" alt="picture"/>
-                        <h2>News Heading</h2>
-                        <p>A very shot exerpt goes here... </p>
-                    </div>
+<notempty name="panel_banner">
+    <div id="wrapper">
+        <div id="slider">
+            <img class="scrollButtons left" src="__IMG__/leftarrow.png">
+            <div style="overflow: hidden;" class="scroll">
+                <div class="scrollContainer">
+                    <volist name="panel_banner" id="vo">
+                        <div class="panel" id="panel_1">
+                            <div class="inside">
+                                <img src="__UPLOADS__/{$vo['ap_pic']}" alt="picture"/>
+                                <h2>{$vo['ap_name']}</h2>
+                                <p>{$vo['default_content']}</p>
+                            </div>
+                        </div>
+                    </volist>
                 </div>
-
-                <div class="panel" id="panel_2">
-                    <div class="inside">
-                        <img src="__IMG__/2.jpg" alt="picture"/>
-                        <h2>News Heading</h2>
-                        <p>A very shot exerpt goes here... </p>
-                    </div>
-                </div>
-
-                <div class="panel" id="panel_3">
-                    <div class="inside">
-                        <img src="__IMG__/3.jpg" alt="picture"/>
-                        <h2>News Heading</h2>
-                        <p>A very shot exerpt goes here... </p>
-                    </div>
-                </div>
-
-                <div class="panel" id="panel_4">
-                    <div class="inside">
-                        <img src="__IMG__/4.jpg" alt="picture"/>
-                        <h2>News Heading</h2>
-                        <p>A very shot exerpt goes here... </p>
-                    </div>
-                </div>
-
-                <div class="panel" id="panel_5">
-                    <div class="inside">
-                        <img src="__IMG__/5.jpg" alt="picture"/>
-                        <h2>News Heading</h2>
-                        <p>A very shot exerpt goes here... </p>
-                    </div>
-                </div>
-
             </div>
+            <img class="scrollButtons right" src="__IMG__/rightarrow.png">
         </div>
-        <img class="scrollButtons right" src="__IMG__/rightarrow.png">
     </div>
-</div>
-<div class="clear"></div>
+    <div class="clear"></div>
+</notempty>
 <script>
     $(function () {
         var slidey = $('.banner').unslider({

@@ -14,8 +14,10 @@ class IndexController extends BaseController{
 	}
 	public function index(){
 		$banner_where['ap_code'] = 'banner';
-		$banner_where['is_use'] = 1;
+		$panel_banner_where['ap_code'] = 'panel_banner';
+		$panel_banner_where['is_use'] = $banner_where['is_use'] = 1;
 		$this->banner = M('AdvPosition')->where($banner_where)->order('ap_sort')->select();
+		$this->panel_banner = M('AdvPosition')->where($panel_banner_where)->order('ap_sort')->select();
 		$this->links = M('Links')->where(array('status'=>1))->order('sort')->select();
 		$this->display();
 	}
