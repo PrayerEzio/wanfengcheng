@@ -10,25 +10,25 @@
     </div>
     <ul class="member-list">
         <a href="{:U('Member/index')}">
-            <li class="i-list"><i class="icon-cog i-bg i-color"></i>基础资料</li>
+            <li <if condition="ACTION_NAME eq 'index'">class="i-list"</if>><i class="icon-cog i-bg i-color"></i>基础资料</li>
         </a>
         <a href="{:U('Member/order')}">
-            <li><i class="icon-ok i-color i-bg2"></i>订单管理</li>
+            <li <if condition="ACTION_NAME eq 'order' || CONTROLLER_NAME eq 'order'">class="i-list"</if>><i class="icon-ok i-color i-bg2"></i>订单管理</li>
         </a>
         <a href="{:U('Member/favorite')}">
-            <li><i class="icon-heart i-bg5 i-color"></i>我喜爱的</li>
+            <li <if condition="ACTION_NAME eq 'favorite'">class="i-list"</if>><i class="icon-heart i-bg5 i-color"></i>我喜爱的</li>
         </a>
         <a href="{:U('Member/collect')}">
-            <li><i class=" icon-star i-bg4 i-color"></i>我的收藏</li>
+            <li <if condition="ACTION_NAME eq 'collect'">class="i-list"</if>><i class=" icon-star i-bg4 i-color"></i>我的收藏</li>
         </a>
         <a href="{:U('Member/address')}">
-            <li><i class=" icon-map-marker i-bg6 i-color1"></i>收货地址</li>
+            <li <if condition="ACTION_NAME eq 'address'">class="i-list"</if>><i class=" icon-map-marker i-bg6 i-color1"></i>收货地址</li>
         </a>
         <a href="{:U('Member/message')}">
-            <li><i class="icon-comments i-bg7 i-color"></i>消息中心</li>
+            <li <if condition="ACTION_NAME eq 'message'">class="i-list"</if>><i class="icon-comments i-bg7 i-color"></i>消息中心</li>
         </a>
         <a href="{:U('Member/resetPassword')}">
-            <li><i class=" icon-lock i-bg8 i-color1"></i>修改密码</li>
+            <li <if condition="ACTION_NAME eq 'resetPassword'">class="i-list"</if>><i class=" icon-lock i-bg8 i-color1"></i>修改密码</li>
         </a>
     </ul>
 </div>

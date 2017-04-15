@@ -34,6 +34,7 @@ class GoodsController extends BaseController
         $page = new Page($list_count, 20);
         $this->list = M('Goods')->where($list_where)->order('goods_sort')->limit($page->firstRow . ',' . $page->listRows)->select();
         $this->page = $page->show();
+        $this->search = $_GET;
         $this->display();
     }
 

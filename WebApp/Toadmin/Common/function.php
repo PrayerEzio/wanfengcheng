@@ -54,7 +54,7 @@ function getTreeClassList($show_deep='3')
 {
     $GoodsClass = M("GoodsClass");
 	//$class_list=$GoodsClass->join('LEFT JOIN __GOODS_TYPE__ ON __GOODS_CLASS__.gc_type_id= __GOODS_TYPE__.type_id')->order('gc_parent_id asc,gc_sort asc,gc_id asc')->select();
-	$class_list=$GoodsClass->order('gc_parent_id asc,gc_sort desc,gc_id asc')->select();
+	$class_list=$GoodsClass->order('gc_parent_id asc,gc_sort,gc_id asc')->select();
 	
 	$goods_class = array();//分类数组
 	if(is_array($class_list) && !empty($class_list)) 

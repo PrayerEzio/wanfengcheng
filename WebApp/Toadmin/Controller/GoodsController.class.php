@@ -52,7 +52,7 @@ class GoodsController extends GlobalController {
 				$this->goodsBrandModel->where(array('brand_id'=>$val))->delete();
 			}
 		}
-		$list = $this->goodsBrandModel->order('brand_sort desc')->select();
+		$list = $this->goodsBrandModel->order('brand_sort')->select();
 		$this->assign('list', $list);
 		$this->title = '商品品牌';
 		$this->display();

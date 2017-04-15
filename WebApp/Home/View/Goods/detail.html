@@ -1,161 +1,630 @@
-<include file="Public/header"/>
-<!--top-->
-{:W('Top/index')}
-<!--nav-->
-{:W('Nav/index')}
-<!--main-->
-<div class="main">
-    <div class="container clearfix">
-        <div class="bread">
-            <a href="{:U('Index/index')}">首页</a> / <a href="{:U('Search/index',array('word'=>$goods['GoodsBrand']['brand_name']))}">{$goods['GoodsBrand']['brand_name']}</a> / <span>
-            <if condition="empty($_GET['spec_id'])">
-            {$goods['goods_name']}
-            <else/>
-            {$spec['spec_name']}
-            </if>
-            </span>
-        </div>
-        <div class="mainL fl">
-            <div class="zoom clearfix">
-                <div id="tsShopContainer" class="fl">
-                	<notempty name="goods['goods_pic']">
-                    <div id="tsImgS">
-                        <a href="__UPLOADS__/{$goods['goods_pic']}" title="Images" class="MagicZoom rlt" id="MagicZoom">
-                            <img width="380" height="380" src="__UPLOADS__/{$goods['goods_pic']}" class="clone"/>
-                        </a>
-                    </div>
-                    <else/>
-                    <div id="tsImgS">
-                        <a href="__IMG__/nopic.jpg" title="Images" class="MagicZoom rlt" id="MagicZoom">
-                            <img width="380" height="380" src="__IMG__/nopic.jpg" class="clone"/>
-                        </a>
-                    </div>
-                    </notempty>
-                    <div id="tsPicContainer">
-                        <div id="tsImgSArrL" onclick="tsScrollArrLeft()"></div>
-                        <div id="tsImgSCon">
-                            <ul>
-                            	<notempty name="goods['goods_pic']">
-                            	<li onclick="showPic(0)" rel="MagicZoom" class="tsSelectImg"><img height="42" width="42" src="__UPLOADS__/{$goods['goods_pic']}" tsImgS="__UPLOADS__/{$goods['goods_pic']}" /></li>
-                            	<else/>
-                            	<li onclick="showPic(0)" rel="MagicZoom" class="tsSelectImg"><img height="42" width="42" src="__IMG__/nopic.jpg" tsImgS="__IMG__/nopic.jpg" /></li>
-                            	</notempty>
-                            	<volist name="goods['GoodsPic']" id="vo" key="key">
-                                <li onclick="showPic({$key})" rel="MagicZoom" <if condition="$key eq 0">class="tsSelectImg"</if>><img height="42" width="42" src="__UPLOADS__/{$vo['pic']}" tsImgS="__UPLOADS__/{$vo['pic']}" /></li>
-                                </volist>
-                            </ul>
+<include file="Public:header"/>
+<body>
+{:W('Nav/top')}
+<div class="all">
+    <div class="location">
+        <span><a href="">商城返利</a></span> &nbsp>&nbsp
+        <span><a href="">家居数码</a></span> &nbsp>&nbsp
+        <span><a href="">生活家电</a></span> &nbsp>&nbsp
+        <span><a href="">插线板插座插排 安全可靠</a></span>
+    </div>
+</div>
+<div class="goodsshow1">
+    <div class="all">
+        <div class="con-FangDa" id="fangdajing">
+            <div class="con-fangDaIMg">
+                <!-- 正常显示的图片-->
+                <img src="__UPLOADS__/{$goods['goods_pic']}">
+                <!-- 滑块-->
+                <div class="magnifyingBegin"></div>
+                <!-- 放大镜显示的图片 -->
+                <div class="magnifyingShow"><img src="__UPLOADS__/{$goods['goods_pic']}"></div>
+            </div>
+            <ul class="con-FangDa-ImgList">
+                <!-- 图片显示列表 -->
+                <li class="active"><img src="__UPLOADS__/{$goods['goods_pic']}"
+                                        data-bigimg="__UPLOADS__/{$goods['goods_pic']}"></li>
+                <volist name="goods['GoodsPic']" id="vo" key="key">
+                    <li><img src="__UPLOADS__/{$vo['pic']}" data-bigimg="__UPLOADS__/{$vo['pic']}"></li>
+                </volist>
+            </ul>
+            <div class="productdetails-2">
+                <a href=""><i class="icon-star">收藏</i></a>
+                    <span class="share-i"><i class="icon-share">分享</i>
+                        <div class="share" style="display:none;">
+                            <a href=""><img src="__IMG__/qq.png" alt="" height="25px;"></a>
+                            <a href=""><img src="__IMG__/wx.png" alt="" height="25px;"></a>
+                            <a href=""><img src="__IMG__/wb.png" alt="" height="25px;"></a>
                         </div>
-                        <div id="tsImgSArrR" onclick="tsScrollArrRight()"></div>
-                    </div>
-                    <img class="MagicZoomLoading" width="16" height="16" src="__IMG__/loading.gif" alt="Loading..." />
-                </div>
-                <div class="zoomR fr">
-                    <h3 class="ellipsis">
-                    <if condition="empty($_GET['spec_id'])">
-		            佐西卡{$goods['goods_code']}投影机灯泡适用于{$goods['GoodsBrand']['brand_name']} {$goods['goods_name']}
-		            <else/>
-		            佐西卡{$goods['goods_code']}投影机灯泡适用于{$goods['GoodsBrand']['brand_name']} {$spec['spec_name']}
-		            </if>
-		            </h3>
-		            <notempty name="goods['goods_code']">
-                    <div class="review">
-                        <span>产品编码：{$goods['goods_code']}</span>
-                    </div>
-                    </notempty>
-                    <h5 style="font-size:16px;color:#000;">机器信息:</h5>
-                    <p style="text-indent:2em">机器品牌：{$goods['GoodsBrand']['brand_name']}</p>
-                    <!-- <if condition="empty($_GET['spec_id'])">
-                    <p style="text-indent:2em">机器型号：
-                    <volist name="goods['GoodsSpec']" id="vo">
-                    	<a href="{:U('',array('spec_id'=>$vo['spec_id']))}">{$vo['spec_name']}</a>&nbsp;&nbsp;
-                    </volist>
-                    </p>
-                    <else/>
-                    	<a href="{:U('',array('spec_id'=>$_GET['spec_id']))}">{$_GET['spec_id']|get_spec_name}</a>
-                    </if> -->
-                    <p style="text-indent:2em">显示技术：{$goods['display_technique']}</p>
-                    <h5 style="font-size:16px;color:#000;margin-top:20px">灯泡信息:</h5>
-                    <p style="text-indent:2em">灯组型号：{$goods['goods_name']}</p>
-                    <p style="text-indent:2em">灯泡品牌：{$goods['bulb_brand']}</p>
-                    <p style="text-indent:2em">灯泡功率：{$goods['bulb_wattage']}W</p>
-                    <notempty name="discount">
-                    <div class="youhui">
-                    	<volist name="discount" id="vo">
-                        <p><span>【店铺优惠】</span>满{$vo['goods_num']}件单价￥{$goods['goods_price']*$vo['goods_price_rate']}</p>
-                        </volist>
-                    </div>
-                    </notempty>
-                    <div class="price">
-                        <s>￥{$goods['goods_mktprice']}</s>
-                        <span>￥{$goods['goods_price']}</span>
-	                    </div>
-                    <div class="num clearfix">
-                        <span class="fl">数量</span>
-                        <a href="javascript:" class="cut fl">-</a>
-                        <input id="num" type="text" value="1" class="many fl" onkeyup="if(!/^\d+$/.test(this.value)) {this.value=this.value.replace(/[^\d]+/g,'');}" />
-                        <a href="javascript:" class="add fl">+</a>
-                        <span>&nbsp;件，（库存<span id="proNum">{$goods['goods_storage']}</span>件）</span>
-                    </div>
-                    <neq name="goods['goods_storage']" value="0">
-                    <a href="javascript:" class="wanna cart" onclick="addCart({$goods['goods_id']})">加入购物车</a>
-                    <a href="JavaScript:buy({$goods['goods_id']})" class="wanna">立即购买</a>
-                    <else/>
-                    <a href="#" class="wanna cash" style="margin-left: 0;text-decoration: none">库存不足，预约</a>
-                    </neq>
-                </div>
-            </div>
-            <div class="content">
-                <ul class="tab">
-                    <li class="current fl">产品详情</li>
-                </ul>
-                {$goods['goods_body']}
+                    </span>
             </div>
         </div>
-        <div class="mainR fr">
-  <style>
-.mainR .slogan a { margin-bottom: 0px;}
-.slogan a { height: 110px;}
-  </style>
-            <div class="slogan">
-                <volist name="notice" id="vo">
-		        <a href="{:U('Notice/detail',array('id'=>$vo['notice_id']))}" ><img src="__UPLOADS__/{$vo['notice_pic']}" style="width:200px; height:87px;"></a>
-		        </volist>
+        <div class="goodsshow-massge">
+            <h2>{$goods['goods_name']}</h2>
+            <p class="goodsshow-m-l-c">{$goods['goods_desc']}</p>
+            <div class="goodsshow-t-m">
+                <p class="g-t-m-1">价格<span>¥<em>{$goods['goods_mkprice']}</em></span></p>
+                <p class="g-t-m-2">淘货价<em>{$goods['goods_price']}</em></p>
+                <span class="goodsshow-t-sales">销量 <em>{$goods['goods_sales']}</em> 件</span>
+                <p class="g-t-m-1">积分<span><i>{$goods['goods_point']}</i></span></p>
+            </div>
+            <div class="goodsshow-c">
+                <div class="goodsshow-c-1">
+                    <span>运费</span>
+                    <div class="goodsshow-c-2">
+                        <span class="store-area">广东 深圳 &nbsp;&nbsp;至</span>
+                        <span class="area-choice">广东<i class=" icon-chevron-down"></i></span>
+                        <span class="area-money">免运费</span>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="goodsshow-c-1">
+                    <span class="goodsshow-c-1-s">颜色</span>
+                    <div class="goodsshow-c-2">
+                        <ul class="goodsshow-c-ul">
+                            <li><a href=""><img src="__IMG__/商品1.jpg" alt="" width="35px" height="35px"></a></li>
+                            <li><a href=""><img src="__IMG__/商品1.jpg" alt="" width="35px" height="35px"></a></li>
+                            <li><a href=""><img src="__IMG__/商品1.jpg" alt="" width="35px" height="35px"></a></li>
+                            <li><a href=""><img src="__IMG__/商品1.jpg" alt="" width="35px" height="35px"></a></li>
+                            <li><a href=""><img src="__IMG__/商品1.jpg" alt="" width="35px" height="35px"></a></li>
+                            <li><a href=""><img src="__IMG__/商品1.jpg" alt="" width="35px" height="35px"></a></li>
+                            <li><a href=""><img src="__IMG__/商品1.jpg" alt="" width="35px" height="35px"></a></li>
+                            <li><a href=""><img src="__IMG__/商品1.jpg" alt="" width="35px" height="35px"></a></li>
+                            <li><a href=""><img src="__IMG__/商品1.jpg" alt="" width="35px" height="35px"></a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="goodsshow-c-1">
+                    <span>尺码</span>
+                    <div class="goodsshow-c-2 goodsshow-c-w">
+                        <ul class="goodsshow-c-ul">
+                            <li><a href="">21a</a></li>
+                            <li><a href="">21a</a></li>
+                            <li><a href="">21a</a></li>
+                            <li><a href="">21a</a></li>
+                            <li><a href="">21a</a></li>
+                            <li><a href="">21a</a></li>
+                        </ul>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="goodsshow-c-1">
+                    <span>数量</span>
+                    <div class="goodsshow-c-3">
+                        <input type="button" value="-" class="goodsshow-c-2-b reduce">
+                        <input type="text" value="1" class="goodsshow-c-2-n num">
+                        <input type="button" value="+" class="goodsshow-c-2-b add">
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="buy-button-m">
+                    <button class="buy-button buy-b-c-1">加入购物车</button>
+                    <button class="buy-button buy-b-c-2">立即购买</button>
+                </div>
+            </div>
+        </div>
+        <div class="store-information">
+            <b class="store-name"><a href="">友博化妆品特卖店</a></b>
+            <div class="line-3"></div>
+            <p class="store-reputation">信誉： <span class="store-i-i"><i class="reputation-icon1"></i><i
+                    class="reputation-icon2"></i>
+				<i class="reputation-icon3"></i><i class="reputation-icon4"></i></span></p>
+            <div class="line-3"></div>
+            <p class="store-reputation">资质 :  <span class="store-i-i"><i class="aptitude-icon-1"></i><i
+                    class="aptitude-icon-2"></i>
+				<i class="aptitude-icon-3"></i></span></p>
+            <div class="line-3"></div>
+            <div class="store-s-a">
+                <div class="store-score s-s-1">
+                    <p>描述</p>
+                    <em>4.8<b class="overtop">↑</b></em>
+                </div>
+                <div class="store-score">
+                    <p>服务</p>
+                    <em>4.7<b class="under">↓</b></em>
+                </div>
+                <div class="store-score s-s-2">
+                    <p>发货</p>
+                    <em>4.8<b class="overtop">↑</b></em>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="store-more">
+                <a href="" target="_blank" class="store-enter">进入店铺</a>
+                <a href="" class="store-enter">收藏店铺</a>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="friend">
+            <div class="mr_frbox">
+                <img class="mr_frBtnL prev" src="__IMG__/leftarrow.png">
+                <div class="mr_frUl">
+                    <ul id="mr_fu">
+                        <li>
+                            <div class="showcase6">
+                                <a href=""><img src="__IMG__/s1.jpg" alt="" width="180px" height="150px"></a>
+                                <a href=""><span class="sc-t-1">手机配饰</span></a>
+                                <div class="clear"></div>
+                                <div class="showcase-text">
+                                    <p class="mr_fu-sc">¥8</p>
+                                    <a href=""><i class="sc-t-4">已售44件</i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showcase6">
+                                <a href=""><img src="__IMG__/s1.jpg" alt="" width="180px" height="150px"></a>
+                                <a href=""><span class="sc-t-1">手机配饰</span></a>
+                                <div class="clear"></div>
+                                <div class="showcase-text">
+                                    <p class="mr_fu-sc">¥8</p>
+                                    <a href=""><i class="sc-t-4">已售44件</i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showcase6">
+                                <a href=""><img src="__IMG__/s1.jpg" alt="" width="180px" height="150px"></a>
+                                <a href=""><span class="sc-t-1">手机配饰</span></a>
+                                <div class="clear"></div>
+                                <div class="showcase-text">
+                                    <p class="mr_fu-sc">¥8</p>
+                                    <a href=""><i class="sc-t-4">已售44件</i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showcase6">
+                                <a href=""><img src="__IMG__/s1.jpg" alt="" width="180px" height="150px"></a>
+                                <a href=""><span class="sc-t-1">手机配饰</span></a>
+                                <div class="clear"></div>
+                                <div class="showcase-text">
+                                    <p class="mr_fu-sc">¥8</p>
+                                    <a href=""><i class="sc-t-4">已售44件</i></a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showcase6">
+                                <a href=""><img src="__IMG__/s1.jpg" alt="" width="180px" height="150px"></a>
+                                <a href=""><span class="sc-t-1">手机配饰</span></a>
+                                <div class="clear"></div>
+                                <div class="showcase-text">
+                                    <p class="mr_fu-sc">¥8</p>
+                                    <a href=""><i class="sc-t-4">已售44件</i></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <img class="mr_frBtnR next" src="__IMG__/rightarrow.png"/>
+            </div>
+        </div>
+        <div class="friend-more"><a href=""><img src="__IMG__/more.jpg" alt=""></a></div>
+        <div class="clear"></div>
+        <div class="left">
+            <div class="hottags">
+                <h3 class="hottags-title">热门标签</h3>
+                <div class="hottags-1">
+                    <a href="">猫粮</a>
+                    <a href="">猫粮</a>
+                    <a href="">猫粮</a>
+                    <a href="">猫粮</a>
+                    <a href="">猫粮</a>
+                    <a href="">猫粮</a>
+                    <a href="">猫粮123</a>
+                    <a href="">猫粮</a>
+                    <a href="">猫粮</a>
+                    <a href="">猫粮</a>
+                    <a href="">猫粮</a>
+                </div>
+            </div>
+            <div class="hotcase">
+                <h3 class="hottags-title">人气商品</h3>
+                <div class="showcase5">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="220px" height="190px"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase5">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="220px" height="190px"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase5">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="220px" height="190px"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase5">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="220px" height="190px"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase5">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="220px" height="190px"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="detail-tab right">
+            <ul class="tabs">
+                <li class="active-tab"><a href="#tab1">宝贝详情</a></li>
+                <li><a href="#tab2">90天评价(0)</a></li>
+                <li><a href="#tab3">售后保障</a></li>
+                <li><a href="#tab4">商品咨询</a></li>
+            </ul>
+            <div class="clear"></div>
+            <div class="tab_container tab-l">
+                <div id="tab1" class="tab_content" style="display: block;">
+                    <p class="tab_tit"><em>●</em><strong>商品参数</strong></p>
+                    {$goods['goods_body']}
+                </div>
+
+                <div id="tab2" class="tab_content" style="display: none;">
+                    <div>
+                        <p class="ninty">90天评价</p>
+                        <div class="nav-eva">
+                            <div class="evaluate-1">
+                                <h1>100%</h1>
+                                <span>好评率</span>
+                            </div>
+                            <div class="evaluate-2">
+                                <p>描述相符 :
+                                    <span class="star-form"><i class="icon-star star-c"></i><i
+                                            class="icon-star star-c"></i><i class="icon-star star-c"></i><i
+                                            class="icon-star star-c"></i><i
+                                            class="icon-star star-c"></i></span><em>5.0分</em></p>
+                                <p>服务态度 :
+                                    <span class="star-form"><i class="icon-star star-c"></i><i
+                                            class="icon-star star-c"></i><i class="icon-star star-c"></i><i
+                                            class="icon-star star-c"></i><i
+                                            class="icon-star star-c"></i></span><em>5.0分</em></p>
+                                <p>发货速度 :
+                                    <span class="star-form"><i class="icon-star star-c"></i><i
+                                            class="icon-star star-c"></i><i class="icon-star star-c"></i><i
+                                            class="icon-star star-c"></i><i
+                                            class="icon-star-half star-c"></i></span><em>4.9分</em></p>
+                            </div>
+                            <div class="evaluate-3">
+                                <p>对商品进行评价</p>
+                                <a href=""><span>发评论拿积分</span></a>
+                            </div>
+                        </div>
+                        <div class="ninty">
+                            <form action="">
+                                <input type="radio" name="all"><span class="radio-s">全部</span>
+                                <input type="radio" name="all"><span class="radio-s">有图片(0)</span>
+                                <input type="radio" name="all"><span class="radio-s">追评(0)</span>
+                            </form>
+                        </div>
+
+                        <div class="pro-user-left PRO-USER-FL">
+                            <span>122******12</span><br/>
+                            <i><img src="__IMG__/b_blue_1.gif" alt=""></i>
+                        </div>
+                        <div class="pro-uder-right1 PRO-USER-FL">
+                            <p>鞋柜很实用，放的鞋子多，质量很好，美观大方，值得购买。</p>
+                            <span>2017-03-06 21:58:31</span>
+                        </div>
+                        <div class="pro-uder-right2 PRO-USER-FL">
+                            <p>颜色:粉色雪花</p>
+                            <p>尺码:120*60*30cm</p>
+                        </div>
+                        <div class="pro-uder-right3 PRO-USER-FL">
+                            <span class="star-form"><i class="icon-star star-c"></i><i class="icon-star star-c"></i><i
+                                    class="icon-star star-c"></i><i class="icon-star star-c"></i><i
+                                    class="icon-star star-c"></i></span>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="PRO-USER-line"></div>
+                        <div class="pro-user-left PRO-USER-FL pro-user-left PRO-USER-FL">
+                            <span>122******12</span><br/>
+                            <i><img src="__IMG__/b_blue_1.gif" alt=""></i>
+                        </div>
+                        <div class="pro-uder-right1 PRO-USER-FL">
+                            <p>鞋柜很实用，放的鞋子多，质量很好，美观大方，值得购买。</p>
+                            <span>2017-03-06 21:58:31</span>
+                        </div>
+                        <div class="pro-uder-right2 PRO-USER-FL">
+                            <p>颜色:粉色雪花</p>
+                            <p>尺码:120*60*30cm</p>
+                        </div>
+                        <div class="pro-uder-right3 PRO-USER-FL">
+                            <span class="star-form"><i class="icon-star star-c"></i><i class="icon-star star-c"></i><i
+                                    class="icon-star star-c"></i><i class="icon-star star-c"></i><i
+                                    class="icon-star star-c"></i></span>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="PRO-USER-line"></div>
+                        <div class="pro-user-left PRO-USER-FL">
+                            <span>122******12</span><br/>
+                            <i><img src="__IMG__/b_blue_1.gif" alt=""><img src="__IMG__/b_blue_1.gif" alt=""></i>
+                        </div>
+                        <div class="pro-uder-right1 PRO-USER-FL">
+                            <p>鞋柜很实用，放的鞋子多，质量很好，美观大方，值得购买。</p>
+                            <div>
+                                <img src="__IMG__/商品1.jpg" alt="" width="13%" onclick="pro_form_show();"
+                                     class="pro-poiner">
+
+                                <div class="pro-user-show" style="display:none;" id="pro-show-s">
+                                    <p onclick="pro_form_close()" class="pro-poiner">收起</p>
+                                    <img src="__IMG__/商品1.jpg" alt="" width="90%">
+                                </div>
+                            </div>
+                            <p>2017-03-06 21:58:31</p>
+                            <p>当天追评:</p>
+                        </div>
+                        <div class="pro-uder-right2 PRO-USER-FL">
+                            <p>颜色:粉色雪花</p>
+                            <p>尺码:120*60*30cm</p>
+                        </div>
+                        <div class="pro-uder-right3 PRO-USER-FL">
+                            <span class="star-form"><i class="icon-star star-c"></i><i class="icon-star star-c"></i><i
+                                    class="icon-star star-c"></i><i class="icon-star star-c"></i><i
+                                    class="icon-star star-c"></i></span>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="PRO-USER-line"></div>
+                    </div>
+                </div>
+                <div id="tab3" class="tab_content" style="display: none;">
+                    <div class="returned-p-m">
+                        <div class="returned-p">
+                            <li><i class="returned-p-image1 returned-p-i"></i></li>
+                            <li><h3>商家错发、漏发，商品描述不符、质量问题？放心退！</h3>
+                                <p>商品有以上问题，无需联系客服，直接申请退款/退货即可</p></li>
+                        </div>
+                        <div class="returned-p">
+                            <li><i class="returned-p-image2 returned-p-i"></i></li>
+                            <li><h3>拍错了，不合适，不喜欢？放心退！</h3>
+                                <p>折800提供8天无理由退货服务，只要不喜欢，直接申请退款/退货即可</p></li>
+                        </div>
+                        <div class="returned-p">
+                            <li><i class="returned-p-image3 returned-p-i"></i></li>
+                            <li><h3>心疼退货邮费？放心退！</h3>
+                                <p>商家错发、漏发，商品描述不符、质量问题，退货运费均由商家承担</p></li>
+                        </div>
+                        <div class="returned-p">
+                            <li><i class="returned-p-image4 returned-p-i"></i></li>
+                            <li><h3>拍错了，不合适，不喜欢？放心退！</h3>
+                                <p>折800提供8天无理由退货服务，只要不喜欢，直接申请退款/退货即可</p></li>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab4" class="tab_content" style="display: none;">
+                    <ul class="takecare">
+                        <li><h3>我要怎么申请退货?</h3>
+                            <span>可在“我的订单”自行提交退货申请，“我的订单”--“退货/退款”提交退货申请。</span><a href="">立即申请退货>></a></li>
+                    </ul>
+                    <ul class="takecare">
+                        <li><h3>退货商品寄到哪里？</h3>
+                            <span>退货申请通过后，我们会将退货地址在退货页面明显位置提醒您，请留意退货页面的提示。</span><a href="">如何查看退货地址？</a></li>
+                    </ul>
+                    <ul class="takecare">
+                        <li><h3>钱退到哪里？退货后什么时候退？</h3>
+                            <p>我们将在收到退货包裹2天内办理退款</p>
+                            <span>退款会根据您选择的支付方式，原路返回，根据银行不同，退款到账时间需3~7个工作日。</span><a href="">如何查询退款记录？</a></li>
+                    </ul>
+                    <ul class="takecare">
+                        <li><h3>退货金额与商品金额不一致？</h3>
+                            <span>您购买的商品如有参加满减或打折活动，退款以商品金额按比例扣除优惠金额后退回。</span><a href="">金额计算规则>></a></li>
+                    </ul>
+                    <ul class="takecare">
+                        <li><h3>退货运费怎么给我？</h3>
+                            <p>商家错发、漏发，商品描述不符、质量问题，退货运费均由商家承担。退款成功后，由折800转账到您的账户。</p>
+                            <span>8天无理由退货成功后，折800将补贴8-10元优惠券。</span><a href="">如何获得退货运费？</a></li>
+                    </ul>
+                    <div class="takecare">
+                        <a href="">查看详细退货政策>></a>
+                    </div>
+                    <div class="PRO-USER-line"></div>
+                    <div class="takecare-s">
+                        <p>如有其它问题，可咨询客服 :</p>
+                        <span class="ta-m">售前: <a href="" class="ta-c"><i class="icon-comment"></i>在线咨询</a></span>
+                        <span>售后: <a href="" class="ta-c"><i class="icon-comment"></i>在线咨询</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="guesslike">
+                <h2 class="guesslike-title">猜你喜欢</h2>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="looklike">
+                <h2 class="guesslike-title">看了此商品的用户还看</h2>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
+                <div class="showcase">
+                    <a href=""><img src="__IMG__/s1.jpg" alt="" width="230px;" height="190px;"></a>
+                    <a href=""><span class="sc-t-1">手机配饰</span></a>
+                    <div class="clear"></div>
+                    <div class="showcase-text">
+                        <p class="sc-t-3">¥8</p>
+                        <a href=""><i class="sc-t-4">已售44件</i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <div class="clear"></div>
 </div>
-<!--提现弹出层-->
-<div class="addressNew hide">
-    <form action="{:U('reserve')}" method="post" class="addressEdit abs" style="height: 80px;margin-top: -40px;">
-        <input type="text" name="num" placeholder="请输入预约数量">
-        <input type="hidden" name="goods_id" value="{$goods['goods_id']}">
-        <input type="hidden" name="spec_id" value="{$spec['spec_id']}">
-        <input type="submit" value="确认预约" class="btn">
-        <a href="#" class="close abs">×</a>
-    </form>
-</div>
-<script src="__JS__/ShopShow.js"></script>
-<script>
-function addCart(goods_id){
-	var num = $("#num").val();
-	var URL= "{:U('Cart/addCart')}";
-	var data = {"goods_id":goods_id,"num":num};
-	$.post(URL,data,function(){
-		
-	});
-}
-function buy(goods_id){
-	var URL= "{:U('buy')}";
-	var goods_num = $("#num").val();
-	var data = {"goods_id":goods_id,"goods_num":goods_num};
-	$.post(URL,data,function(result){
-		if (result.code != 200){
-			alert(result.msg);
-		}else {
-			window.location.href = "/Cart/autoBuy/goods_id/"+goods_id;
-		}
-	},"json");
-}
+<div class="clear"></div>
+<script type="text/javascript">
+    $(function () {
+        $(".weixin1").hover(function () {
+            $(".wx1").toggle();
+        });
+    });
+    $(function () {
+        $(".share-i").hover(function () {
+            $(".share").toggle();
+        });
+    });
+
+    var oNum = $('.num').val();
+    $('.reduce').click(function () {
+        if (oNum >= 2) {
+            oNum--;
+            $('.num').val(oNum);
+        }
+        ;
+    });
+    $('.add').click(function () {
+        oNum++;
+        $('.num').val(oNum);
+    });
+    $(document).ready(function () {
+    });
+
+
+    /* 图片滚动效果 */
+    $(".mr_frbox").slide({
+        titCell: "",
+        mainCell: ".mr_frUl ul",
+        autoPage: true,
+        effect: "leftLoop",
+        autoPlay: true,
+        vis: 4
+    });
+
+    $(document).ready(function () {
+
+        //Default Action
+        $(".tab_content").hide(); //Hide all content
+        $("ul.tabs li:first").addClass("active-tab").show(); //Activate first tab
+        $(".tab_content:first").show(); //Show first tab content
+
+        //On Click Event
+        $("ul.tabs li").click(function () {
+            $("ul.tabs li").removeClass("active-tab"); //Remove any "active" class
+            $(this).addClass("active"); //Add "active" class to selected tab
+            $(".tab_content").hide(); //Hide all tab content
+            var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+            $(activeTab).fadeIn(); //Fade in the active content
+            return false;
+        });
+
+    });
+    function pro_form_close() {
+        $("#pro-show-s").css("display", "none");
+    }
+    function pro_form_show() {
+        $("#pro-show-s").css("display", "block");
+    }
+    ;
 </script>
-<!--foot-->
-<include file="Public/footer"/>
+<include file="Public:footer"/>

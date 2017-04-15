@@ -34,8 +34,6 @@ class BaseController extends Controller{
 		   echo $web_stting['closed_reason'];
 		   exit;	
 		}else {
-			/* $link = M('Link')->where(array('status'=>1))->order('sort DESC')->select();
-			$this->assign('link',$link); */
 			$this->mid = session('member_id');
 			$this->assign('seo',seo());
 		}

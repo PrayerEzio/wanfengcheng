@@ -1,12 +1,18 @@
 <div class="title">
     <div class="all">
         <div class="title-1">
-            <div>
-                <a href="{:U('Login/index')}"><span>登录</span></a>
-            </div>
-            <div>
-                <a href="{:U('Login/register')}"><span>注册</span></a>
-            </div>
+            <if condition="empty($mid)">
+                <div>
+                    <a href="{:U('Login/index')}"><span>登录</span></a>
+                </div>
+                <div>
+                    <a href="{:U('Login/register')}"><span>注册</span></a>
+                </div>
+            <else/>
+                <div>
+                    您好,<a href="{:U('Member/index')}"><span>{$mid|get_member_nickname}</span></a>
+                </div>
+            </if>
             |
             <div>
                 <span>签到好礼</span>
@@ -47,9 +53,6 @@
                 </volist>
                 <a href="">
                     <li>外卖</li>
-                </a>
-                <a href="">
-                    <li>商城返利</li>
                 </a>
             </ul>
         </div>
