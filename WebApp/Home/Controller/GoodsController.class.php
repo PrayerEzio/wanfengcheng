@@ -43,7 +43,7 @@ class GoodsController extends BaseController
      */
     public function detail()
     {
-        $goods_id = I('id',0,'int');
+        $goods_id = I('goods_id',0,'int');
         $where['goods_id'] = $goods_id;
         $where['goods_status'] = 1;
         $goods = D('Goods')->relation(true)->where($where)->find();

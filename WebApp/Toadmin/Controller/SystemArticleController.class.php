@@ -56,7 +56,7 @@ class SystemArticleController extends GlobalController {
 		}elseif (IS_POST) {
 			$id = intval($_POST['article_id']);
 			$data['article_title'] = str_rp(trim($_POST['article_title']));
-			$data['ac_type'] = str_rp(trim($_POST['ac_type']));
+			//$data['ac_type'] = str_rp(trim($_POST['ac_type']));
 			$data['article_url'] = str_rp(trim($_POST['article_url']));
 			$data['seo_title'] = str_rp(trim($_POST['seo_title']));
 			$data['seo_key'] = str_rp(trim($_POST['seo_key']));

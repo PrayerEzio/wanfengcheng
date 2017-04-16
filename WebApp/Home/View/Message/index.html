@@ -10,13 +10,13 @@
             <volist name="list" id="vo">
                 <div class="inline-mem order-mu">
                     <span class="order-time messagecenter-title">来自淘货吧的消息</span>
-                    <span class="order-time right">02-24 9:00:00</span>
+                    <span class="order-time right">{$vo['notice_time']|date='Y-m-d H:i:s',###}</span>
                 </div>
                 <div class="order-mu2">
                     <a href="{:U('Message/detail')}">
-                        <p class="messagecenter-text messagecenter-text3">活动活动活动</p>
+                        <p class="messagecenter-text messagecenter-text3">{$vo['notice_title']}</p>
                         <p class="order-time messagecenter-text2 messagecenter-text3">
-                            texttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttexttext
+                            {$vo['notice_desc']}
                         </p>
                     </a>
                 </div>

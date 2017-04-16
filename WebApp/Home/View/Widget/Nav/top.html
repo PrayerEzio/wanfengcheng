@@ -8,7 +8,7 @@
                 <div>
                     <a href="{:U('Login/register')}"><span>注册</span></a>
                 </div>
-            <else/>
+                <else/>
                 <div>
                     您好,<a href="{:U('Member/index')}"><span>{$mid|get_member_nickname}</span></a>
                 </div>
@@ -39,21 +39,18 @@
 <div class="logosearchbg">
     <div class="all">
         <div class="logo">
-            <a href=""><img src="__UPLOADS__/{:MSC('site_logo')}" alt="" width="200px" height="70px"></a>
+            <a href="{:U('Index/index')}"><img src="__UPLOADS__/{:MSC('site_logo')}" alt="" width="200px" height="70px"></a>
         </div>
         <div class="navigationbar">
             <ul>
                 <a href="{:U('Index/index')}" <if condition="CONTROLLER_NAME == 'Index'">class="colorstyle"</if>>
-                    <li>首页</li>
+                <li>首页</li>
                 </a>
                 <volist name="goods_class" id="vo">
                     <a href="{:U('Goods/index',array('cate'=>$vo['gc_id']))}" <if condition="$gc_id == $vo['gc_id'] || $goods['top_gc_id'] == $vo['gc_id']">class="colorstyle"</if>>
-                        <li>{$vo['gc_name']}</li>
+                    <li>{$vo['gc_name']}</li>
                     </a>
                 </volist>
-                <a href="">
-                    <li>外卖</li>
-                </a>
             </ul>
         </div>
         <div class="search">

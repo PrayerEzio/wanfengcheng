@@ -1,0 +1,16 @@
+<include file="Public:header"/>
+<body>
+{:W('Nav/top')}
+<div class="all">
+    {:W('Member/menu')}
+    <div class="member-2 right">
+        <p class="member-tit">消息中心</p>
+        <div class="line-1"></div>
+        <div class="massage-activity order-mu2">
+            <h3 class="massage-activity-title">{$info['notice_title']}</h3>
+            {$info['notice_content']}
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<include file="Public:footer"/>

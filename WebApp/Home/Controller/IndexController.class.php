@@ -19,6 +19,7 @@ class IndexController extends BaseController{
 		$this->banner = M('AdvPosition')->where($banner_where)->order('ap_sort')->select();
 		$this->panel_banner = M('AdvPosition')->where($panel_banner_where)->order('ap_sort')->select();
 		$this->links = M('Links')->where(array('status'=>1))->order('sort')->select();
+		$this->recommend_goods_list = M('Goods')->where(array('goods_status'=>1))->order('goods_sort')->limit(8)->select();
 		$this->display();
 	}
 }

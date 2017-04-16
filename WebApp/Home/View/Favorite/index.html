@@ -1,0 +1,34 @@
+<include file="Public:header"/>
+<body>
+{:W('Nav/top')}
+<div class="all">
+    {:W('Member/menu')}
+    <div class="member-2 right">
+        <p class="member-tit">订单管理</p>
+        <p class="right order-choice2">
+            <a href="#" class="order-choice-c">宝贝收藏</a>
+            <a href="{:U('Favorite/shop')}">店铺收藏</a>
+        </p>
+        <div class="line-1"></div>
+        <notempty name="list">
+            <volist name="list" id="vo">
+                <div>
+                    <div class="showcase">
+                        <a href="{:U('Goods/detail',array('goods_id'=>$vo['goods_id']))}"><img src="__UPLOADS__/{$vo['goods_pic']}" alt="" width="230px;" height="190px;"></a>
+                        <a href="{:U('Goods/detail',array('goods_id'=>$vo['goods_id']))}"><span class="sc-t-1">{$vo['goods_name']}</span></a>
+                        <div class="clear"></div>
+                        <div class="showcase-text">
+                            <p class="sc-t-3">¥{$vo['goods_price']}</p>
+                            <a href="{:U('Goods/detail',array('goods_id'=>$vo['goods_id']))}"><i class="sc-t-4">已售{$vo['goods_sales']}件</i></a>
+                        </div>
+                    </div>
+                </div>
+            </volist>
+            <div class="crucis-page">{$page}</div>
+            <else/>
+            <div class="crucis-page">没有找到相关信息.</div>
+        </notempty>
+    </div>
+</div>
+<div class="clear"></div>
+<include file="Public:footer"/>

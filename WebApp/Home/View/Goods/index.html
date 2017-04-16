@@ -48,14 +48,14 @@
     <notempty name="list">
     <volist name="list" id="vo">
         <div class="showcase">
-            <a href="{:U('Goods/detail',array('id'=>$vo['goods_id']))}">
+            <a href="{:U('Goods/detail',array('goods_id'=>$vo['goods_id']))}">
                 <empty name="vo['goods_pic']">
                     <img src="__IMG__/nopic.jpg" alt="" width="230px;" height="190px;">
                     <else />
                     <img src="__UPLOADS__/{$vo['goods_pic']}" alt="" width="230px;" height="190px;">
                 </empty>
             </a>
-            <a href="{:U('Goods/detail',array('id'=>$vo['goods_id']))}"><span class="sc-t-1">{$vo['goods_name']}</span></a>
+            <a href="{:U('Goods/detail',array('goods_id'=>$vo['goods_id']))}"><span class="sc-t-1">{$vo['goods_name']}</span></a>
             <div class="clear"></div>
             <div class="showcase-text">
                 <span><p class="sc-t-3">¥{$vo['goods_price']|price_format}</p></span>
