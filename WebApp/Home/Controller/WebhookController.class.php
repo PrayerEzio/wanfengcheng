@@ -18,7 +18,7 @@ class WebhookController extends BaseController
 	{
 		if (IS_POST) {
 			system_log('Github webhook.', 'post请求已被接受,start git cmd.', 0, 'github');
-			$cmd = 'cd '.BasePath.';git checkout dev;git pull origin dev:dev;';
+			$cmd = 'cd '.BasePath.';sudo git checkout dev;sudo git pull origin dev:dev;';
 			$output = shell_exec($cmd);
 			system_log('Github webhook.', $output, 0, 'github');
 		}
