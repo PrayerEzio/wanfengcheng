@@ -259,6 +259,7 @@ ul{
     height:241px;
     text-align: center;
     padding: 10px 0;
+    overflow: hidden;
 }
 .masl-color1{
     background: #dd657b;

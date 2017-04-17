@@ -17,7 +17,7 @@
                 <p>换头像</p>
             </div>
             <div class="mem-inde">
-                <p><span class="mem-inde-s">用户名: </span>{$member_info['nickname']}</p>
+                <p><span class="mem-inde-s">用户名: </span>{$member_info['member_id']|get_member_nickname}</p>
                 <p><span class="mem-inde-s">积分: </span>12分</p>
                 <p><span class="mem-inde-s">会员等级: </span><img src="__IMG__/b_blue_1.gif" alt="" class="level"></p>
             </div>
@@ -25,14 +25,16 @@
         <div class="clear"></div>
         <div class="mem-l-w">
             <ul class="mem-list-u">
-                <li><span class="mem-inde-s">姓名: </span><input type="text" class="mem-inde-i mem-inde-w"></li>
-                <li><span class="mem-inde-s">性别: </span><select name="" id="" class="mem-inde-i">
-                    <option>男</option>
-                    <option>女</option>
-                </select></li>
-                <li><span class="mem-inde-s">年龄: </span><input type="text" class="mem-inde-i mem-inde-w"></li>
-                <li><span class="mem-inde-s">绑定手机: </span><input type="text" class="mem-inde-i mem-inde-w"></li>
-                <li><span class="mem-inde-s">绑定邮箱: </span><input type="text" class="mem-inde-i mem-inde-w"></li>
+                <li><span class="mem-inde-s">姓名: </span><input type="text" name="nickname" value="{$member_info['nickname']}" class="mem-inde-i mem-inde-w"></li>
+                <li><span class="mem-inde-s">性别: </span>
+                    <select name="gender" id="" class="mem-inde-i">
+                        <option value="1" <if condition="$member_info['gender'] eq 1">select="selected"</if>>男</option>
+                        <option value="2" <if condition="$member_info['gender'] eq 2">select="selected"</if>>女</option>
+                    </select>
+                </li>
+                <li><span class="mem-inde-s">年龄: </span><input type="text" name="age" value="{$member_info['age']}" class="mem-inde-i mem-inde-w"></li>
+                <li><span class="mem-inde-s">绑定手机: </span><input type="text" name="mobile" value="{$member_info['mobile']}" class="mem-inde-i mem-inde-w"></li>
+                <li><span class="mem-inde-s">绑定邮箱: </span><input type="text" name="email" value="{$member_info['email']}" class="mem-inde-i mem-inde-w"></li>
                 <li><input type="button" value="保存" class="mem-list-u-b mem-inde-i mem-inde-w2"></li>
             </ul>
         </div>

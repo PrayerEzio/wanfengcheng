@@ -43,7 +43,7 @@ class MemberController extends BaseController{
 			$res = M('Member')->where($where)->save($data);
 		}
 		$info = M('Member')->where($where)->find();
-		$this->info = $info;
+		$this->member_info = $info;
 		$this->display();
 	}
 	/**
