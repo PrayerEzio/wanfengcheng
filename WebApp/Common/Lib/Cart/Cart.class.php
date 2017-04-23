@@ -130,10 +130,9 @@ class Cart{
  
         $sum = 0;
         $data = $_SESSION['cart'];
-        foreach ($data as $item) {
-            foreach ($item as $value)
-            {
-                $sum += $value['num'];
+        foreach ($data as $goods) {
+            foreach ($goods as $value) {
+                    $sum += $value['num'];
             }
         }
         return $sum;
@@ -150,8 +149,8 @@ class Cart{
         }
         $price = 0.00;
         $data = $_SESSION['cart'];
-        foreach ($data as $item) {
-            foreach ($item as $value)
+        foreach ($data as $goods) {
+            foreach ($goods as $value)
             {
                 $price += $value['num'] * $value['price'];
             }

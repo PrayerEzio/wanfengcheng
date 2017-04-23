@@ -8,6 +8,7 @@
  * @author	   muxiangdao-cn Team
  */
 namespace Home\Controller;
+use Common\Lib\Cart\Cart;
 use Think\Controller;
 
 class BaseController extends Controller{
@@ -155,6 +156,53 @@ class BaseController extends Controller{
 			echo json_encode($data);
 		}else {
 			echo '非法操作';
+		}
+	}
+
+
+	public function collect()
+	{
+		if (IS_AJAX)
+		{
+			if (empty($this->mid))
+			{
+				return json_return(300,'请先登录.');
+			}
+			$data['cid'] = intval($_POST['id']);
+			$data['type'] = str_rp($_POST['type'],1);
+			$data['member_id'] = $this->mid;
+			$count = M('Collect')->where($data)->count();
+			if ($count)
+			{
+				return json_return(300,'您已经收藏过了.');
+			}
+			switch ($data['type'])
+			{
+				case 'goods':
+					$goods = M('Goods')->where(array('goods_id'=>$data['cid']))->field('goods_pic,goods_name')->find();
+					$data['pic'] = $goods['goods_pic'];
+					$data['name'] = $goods['goods_name'];
+					break;
+				case 'store':
+					//TODO:
+					break;
+				default:
+					break;
+			}
+			$data['create_time'] = time();
+			M('Collect')->add($data);
+			return json_return(200,'收藏成功.');
+		}
+	}
+
+	public function cancelCollect()
+	{
+		if (IS_AJAX)
+		{
+			$where['cid'] = intval($_POST['id']);
+			$where['type'] = str_rp($_POST['type'],1);
+			$where['member_id'] = $this->mid;
+			M('Collect')->where($where)->delete();
 		}
 	}
 }

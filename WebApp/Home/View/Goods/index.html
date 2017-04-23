@@ -22,21 +22,18 @@
         <div class="productlist-2 produtlist-choice-2">
             <ul>
                 <a href="{:U('Goods/index',array('cate'=>$search['cate']))}">
-                    <li>综合</li>
+                    <li><a href="{:U('',array_merge(I(),['sort'=>'','order'=>'','p'=>'']))}">综合</a></li>
                 </a>
-                <li class="sorting">按销量排序
-                    <div class="sorting-1" style="display:none;">
-                        <a href=""><p>按销量最高</p></a>
-                        <a href=""><p>按销量最低</p></a>
-                    </div>
-                </li>
+                <a href="{:U('',array_merge(I(),['sort'=>'sales','order'=>'desc','p'=>'']))}">
+                    <li>按销量最高</li>
+                </a>
                 <li class="sorting">按价格排序
                     <div class="sorting-1" style="display:none;">
                         <a href=""><p>按价格最高</p></a>
                         <a href=""><p>按价格最低</p></a>
                     </div>
                 </li>
-                <a href="">
+                <a href="{:U('',array_merge(I(),['sort'=>'time','order'=>'desc','p'=>'']))}">
                     <li>最新</li>
                 </a>
             </ul>

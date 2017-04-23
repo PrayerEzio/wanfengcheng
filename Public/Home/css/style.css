@@ -518,7 +518,6 @@ ul{
 }
 
 .sc-t-1{
-    width: 150px;
     white-space: nowrap;
     overflow :hidden;
     text-overflow: ellipsis;
@@ -1515,6 +1514,7 @@ ul{
     font-size: 16px;
     border-radius: 3px;
     border: 1px solid #e5505e;
+    cursor: pointer;
 }
 .buy-b-c-1{
     color: #e5505e;
@@ -1532,7 +1532,6 @@ ul{
 }
 .goodsshow-c-ul li{
     float: left;
-    border: 1px #eee solid;
     margin-left: 10px;
     margin-bottom: 5px;
 }
@@ -1553,15 +1552,13 @@ ul{
     line-height: 36px;
 }
 .goodsshow-c-w li{
-    padding: 2px 10px; 
+    padding: 2px 10px;
+    cursor: pointer;
 }
-.goodsshow-c-ul li:link{
-    border: 1px red solid;
+.spec{
+    border: 1px #eee solid;
 }
-.goodsshow-c-ul li:visited{
-    border: 1px red solid;
-}
-.goodsshow-c-ul li:active{
+.select_spec{
     border: 1px red solid;
 }
 .buy-button-m{
@@ -1848,6 +1845,7 @@ ul{
     border: 1px solid #5bade8;
     margin-top: 15px; 
     border-radius:3px;
+    cursor: pointer;
 }
 .PRO-USER-line{
     border-bottom: 1px solid #eee;

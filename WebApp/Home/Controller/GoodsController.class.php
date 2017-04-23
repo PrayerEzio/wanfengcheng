@@ -19,6 +19,11 @@ class GoodsController extends BaseController
         parent::__construct();
     }
 
+    public function test()
+    {
+        getUrl('', ['p' => 3, 'order' => 'time', 'sort' => 'asc']);
+    }
+
     public function index()
     {
         $gc_id = I('cate', 0, 'int');
@@ -32,7 +37,29 @@ class GoodsController extends BaseController
         $list_where['gc_id'] = array('in', array_merge([$gc_id], $gc_id_array));
         $list_count = M('Goods')->where($list_where)->count();
         $page = new Page($list_count, 20);
-        $this->list = M('Goods')->where($list_where)->order('goods_sort')->limit($page->firstRow . ',' . $page->listRows)->select();
+        switch (I('sort')) {
+            case 'sales':
+                $sort = 'goods_sales';
+                break;
+            case 'time':
+                $sort = 'add_time';
+                break;
+            default :
+                $sort = 'goods_sort';
+                break;
+        }
+        switch (I('order')) {
+            case 'desc':
+                $order = 'desc';
+                break;
+            case 'asc':
+                $order = 'asc';
+                break;
+            default :
+                $order = 'asc';
+                break;
+        }
+        $this->list = M('Goods')->where($list_where)->order("{$sort} {$order}")->limit($page->firstRow . ',' . $page->listRows)->select();
         $this->page = $page->show();
         $this->search = $_GET;
         $this->display();
@@ -43,41 +70,15 @@ class GoodsController extends BaseController
      */
     public function detail()
     {
-        $goods_id = I('goods_id',0,'int');
+        $goods_id = I('goods_id', 0, 'int');
         $where['goods_id'] = $goods_id;
         $where['goods_status'] = 1;
         $goods = D('Goods')->relation(true)->where($where)->find();
-        if ($goods)
-        {
+        if ($goods) {
             $this->goods = $goods;
+            $goods_class = M('GoodsClass')->where(array())->select();
+            $this->all_goods_class = getParents($goods_class,$goods['gc_id'],'gc_parent_id','gc_id');
             $this->display();
-        }else {
-            $this->error('没有找到相关信息');
-        }
-    }
-
-    public function thratre()
-    {
-        $spec_id = intval($_GET['spec_id']);
-        $spec = M('GoodsSpec')->where(array('spec_id' => $spec_id))->find();
-        $this->spec = $spec;
-        $where['goods_id'] = $spec['goods_id'];
-        $where['goods_status'] = 1;
-        $goods = D('Goods')->relation(true)->where($where)->find();
-        if (get_distributor($this->mid)) {
-            $goods['goods_price'] = MSC('distributor_discount') * $goods['goods_price'];
-        }
-        $goods['GoodsPic'] = M('GoodsPic')->where(array('goods_id' => $goods['goods_id'], 'pic_status' => 1))->select();
-        $goods['CommentSum'] = count($goods['GoodsComment']);
-        if (!empty($goods)) {
-            $this->brand = M('GoodsBrand')->where(array('brand_status' => 1, 'gc_id' => array('in', '0,' . $goods['gc_id'])))->order('brand_sort desc')->select();
-            $this->goods = $goods;
-            $this->discount = M('Discount')->order('goods_num')->select();
-            $this->gc = 2;
-            $notice_where['notice_status'] = 1;
-            $notice_where['notice_type'] = 3;
-            $this->notice = M('Notice')->where($notice_where)->order('notice_sort desc')->select();
-            $this->display('Index/theatre');
         } else {
             $this->error('没有找到相关信息');
         }

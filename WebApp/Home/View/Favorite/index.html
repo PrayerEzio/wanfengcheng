@@ -14,12 +14,16 @@
             <volist name="list" id="vo">
                 <div>
                     <div class="showcase">
-                        <a href="{:U('Goods/detail',array('goods_id'=>$vo['goods_id']))}"><img src="__UPLOADS__/{$vo['goods_pic']}" alt="" width="230px;" height="190px;"></a>
-                        <a href="{:U('Goods/detail',array('goods_id'=>$vo['goods_id']))}"><span class="sc-t-1">{$vo['goods_name']}</span></a>
+                        <a href="{:U('Goods/detail',array('goods_id'=>$vo['cid']))}"><img
+                                src="__UPLOADS__/{$vo['pic']}" alt="" width="230px;" height="190px;"></a>
+                        <a href="{:U('Goods/detail',array('goods_id'=>$vo['cid']))}"><span class="sc-t-1">{$vo['name']}</span></a>
                         <div class="clear"></div>
                         <div class="showcase-text">
-                            <p class="sc-t-3">¥{$vo['goods_price']}</p>
-                            <a href="{:U('Goods/detail',array('goods_id'=>$vo['goods_id']))}"><i class="sc-t-4">已售{$vo['goods_sales']}件</i></a>
+                            <if condition="$vo['status'] == 1">
+                                <p class="sc-t-3">¥{$vo['price']}</p>
+                            <else/>
+                                <p class="sc-t-3">已下架</p>
+                            </if>
                         </div>
                     </div>
                 </div>

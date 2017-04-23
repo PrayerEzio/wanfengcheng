@@ -14,6 +14,8 @@ class NavWidget extends BaseController{
 	{
 		$this->gc_id = intval($_GET['cate']);
 		$this->goods_class = M('GoodsClass')->where(array('level'=>1))->order('gc_sort')->select();
+		$cart = new Cart();
+		$this->cart_item_num = $cart->getNum();
 		$this->display('Widget:Nav:top');
 	}
 	public function index(){

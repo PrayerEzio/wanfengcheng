@@ -19,11 +19,24 @@ class FavoriteController extends BaseController
     {
         parent::__construct();
         $this->check_login();
-        $this->model = M('Favorite');
+        $this->model = M('Collect');
     }
 
     public function index()
     {
+        $list_where['member_id'] = $this->mid;
+        $list_where['type'] = 'goods';
+        $list_count = $this->model->where($list_where)->count();
+        $page = new Page($list_count,8);
+        $list = $this->model->where($list_where)->order('create_time desc')->limit("{$page->firstRow},{$page->listRows}")->select();
+        foreach ($list as $key => $item)
+        {
+            $goods = M('Goods')->where(array('goods_id'=>$item['cid']))->field('goods_price,goods_status')->find();
+            $list[$key]['price'] = $goods['goods_price'];
+            $list[$key]['status'] = $goods['goods_status'];
+        }
+        $this->list = $list;
+        $this->page = $page->show();
         $this->display();
     }
 

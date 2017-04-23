@@ -5,46 +5,50 @@
 <div class="returnedbg">
     <div class="all">
         <div class="nav_shopping_cart">
-            <h2 class="nav_s_cart_t">全部商品 <span>(0)</span></h2>
-            <div class="shopcart-list-tit shopcart-list-t-c">
-                <span class="shopcart-all"><input type="checkbox" checked="checked"
-                                                  class="nav_s_cart-cb">全选</span><span>商品信息</span>
-                <ul class="shopcart-list">
-                    <li>单价(元)</li>
-                    <li>数量</li>
-                    <li>金额(元)</li>
-                    <li>操作</li>
-                </ul>
-            </div>
-            <volist name="list" id="vo">
-                <div class="shopcart-list-tit">
-                    <span class="shopcart-all"><input type="checkbox" name="goods_id[]" value="{$vo['id']}" class="nav_s_cart-cb"></span>
-                    <a href="{:U('Goods/detail',array('goods_id'=>$vo['id']))}" target="_blank">
-                        <img src="__UPLOADS__/{$vo['img']}" alt="" width="3%"><span class="shopcart-mas">商品信息</span>
-                    </a>
+            <form action="" method="post">
+                <h2 class="nav_s_cart_t">全部商品 <span>(0)</span></h2>
+                <div class="shopcart-list-tit shopcart-list-t-c">
+                    <span class="shopcart-all"><input type="checkbox" checked="checked"
+                                                      class="nav_s_cart-cb">全选</span><span>商品信息</span>
                     <ul class="shopcart-list">
-                        <li>{$vo['price']|price_format}</li>
-                        <li>{$vo['num']}</li>
-                        <li>{:price_format($vo['price']*$vo['num'])}</li>
-                        <li><a href="JavaScript:void(0);" onclick="removeCart({$vo['id']})">删除</a></li>
+                        <li>单价(元)</li>
+                        <li>数量</li>
+                        <li>金额(元)</li>
+                        <li>操作</li>
                     </ul>
                 </div>
-            </volist>
-            <ul class="shopcart-list sum-cart">
-                <li>总金额 :</li>
-                <li>121312.00元</li>
-            </ul>
-            <div class="clear"></div>
-            <a href="" class="sum-pay">去支付</a>
+                <volist name="list" id="goods_list">
+                    <volist name="goods_list" id="vo">
+                        <div class="shopcart-list-tit" id="detail_{$vo['id']}_{$vo['spec_id']}">
+                            <span class="shopcart-all"><input type="checkbox" name="goods_id[]" value="{$vo['id']}" class="nav_s_cart-cb"></span>
+                            <a href="{:U('Goods/detail',array('goods_id'=>$vo['id']))}" target="_blank">
+                                <img src="__UPLOADS__/{$vo['img']}" alt="" width="3%"><span class="shopcart-mas">{$vo['name']}</span>
+                            </a>
+                            <ul class="shopcart-list">
+                                <li>{$vo['price']|price_format}</li>
+                                <li>{$vo['num']}</li>
+                                <li>{:price_format($vo['price']*$vo['num'])}</li>
+                                <li><a href="JavaScript:void(0);" onclick="removeCart({$vo['id']},{$vo['spec_id']})">删除</a></li>
+                            </ul>
+                        </div>
+                    </volist>
+                </volist>
+                <ul class="shopcart-list sum-cart">
+                    <li>总金额 :</li>
+                    <li>{$amount|price_format}元</li>
+                </ul>
+                <div class="clear"></div>
+                <button class="sum-pay" type="submit">去支付</button>
+            </form>
         </div>
     </div>
 </div>
 <script>
-    function removeCart(goods_id){
+    function removeCart(goods_id,spec_id){
         var URL = "{:U('Cart/removeCart')}";
-        var data = {"goods_id":goods_id};
+        var data = {"goods_id":goods_id,"spec_id":spec_id};
         $.post(URL,data,function(){
-            $("#detail_"+goods_id).remove();
+            $("#detail_"+goods_id+"_"+spec_id).remove();
             var last_count = $("#goods_count").html()*1-1;
             $("#goods_count").html(last_count);
             if (last_count == 0){

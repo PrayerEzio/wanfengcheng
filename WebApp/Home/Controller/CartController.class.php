@@ -23,12 +23,8 @@ class CartController extends BaseController{
 			;
 		}elseif (IS_GET) {
 			$list = $this->Cart->getList();
-			if (get_distributor($this->mid)) {
-				foreach ($list as $key => $val){
-					$list[$key]['price'] = MSC('distributor_discount')*$val['price'];
-				}
-			}
 			$this->list = $list;
+			$this->amount = $this->Cart->getPrice();
 			$this->display();
 		}
 	}
@@ -37,14 +33,19 @@ class CartController extends BaseController{
 	 */
 	public function addCart(){
 		if (IS_AJAX) {
-			$where['goods_id'] = intval($_POST['goods_id']);
-			$where['goods_status'] = 1;
+			$goods_id = intval($_POST['goods_id']);
+			$spec_id = intval($_POST['spec_id']);
+			$goods_where['goods_id'] = $goods_id;
+			$goods_where['goods_status'] = 1;
 			$num = intval($_POST['num']);
 			if ($num) {
-				$goods = $this->model->where($where)->find();
+				$goods = $this->model->where($goods_where)->find();
+				$spec_where['spec_id'] = $spec_id;
+				$spec_where['goods_id'] = $goods_id;
+				$goods['GoodsSpec'] = M('GoodsSpec')->where($spec_where)->find();
 				if ($goods['goods_storage'] >= $num) {
 					$this->Cart = new Cart();
-					$this->Cart->addItem($goods['goods_id'], $goods['goods_name'], $goods['goods_price'], $num, $goods['goods_pic']);
+					$this->Cart->addItem($goods['goods_id'], $goods['goods_name'].' ['.$goods['GoodsSpec']['spec_name'].']', $goods['goods_price'], $num, $goods['goods_pic'],$spec_id);
 				}
 			}
 		}
@@ -55,7 +56,8 @@ class CartController extends BaseController{
 	public function removeCart(){
 		if (IS_AJAX) {
 			$goods_id = intval($_POST['goods_id']);
-			$this->Cart->delItem($goods_id);
+			$spec_id = intval($_POST['spec_id']);
+			$this->Cart->delItem($goods_id,$spec_id);
 		}
 	}
 }
