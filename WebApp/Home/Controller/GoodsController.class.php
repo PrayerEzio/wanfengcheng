@@ -78,7 +78,12 @@ class GoodsController extends BaseController
             $this->goods = $goods;
             $goods_class = M('GoodsClass')->where(array())->select();
             $this->all_goods_class = getParents($goods_class,$goods['gc_id'],'gc_parent_id','gc_id');
-            $this->display();
+            if (empty($goods['goods_external_links']))
+            {
+                $this->display();
+            }else {
+                $this->display('detail2');
+            }
         } else {
             $this->error('没有找到相关信息');
         }

@@ -90,6 +90,13 @@ $(document).ready(function(){
           <td class="vatop rowform"><input type="text" value="{$rs['goods_code']}" name="goods_code" id="goods_code" class="txt"></td>
           <td class="vatop tips"></td>
         </tr>
+        <tr>
+            <td colspan="2" class="required"><label class="validation">优惠劵外链:</label></td>
+        </tr>
+        <tr class="noborder">
+            <td class="vatop rowform"><input type="text" value="{$rs['goods_external_links']}" name="goods_external_links" id="goods_external_links" class="txt"></td>
+            <td class="vatop tips">如果商品不是优惠劵,不用填写.</td>
+        </tr>
         <if condition="$_GET['goods_type'] != 'point_goods'">
         <tr class="noborder">
           <td colspan="2" class="required"><label class="validation">市场价格:</label></td>

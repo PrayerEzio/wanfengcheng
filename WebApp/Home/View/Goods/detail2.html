@@ -1,66 +1,24 @@
 <include file="Public:header"/>
+<body>
 {:W('Nav/top')}
-<div class="clear"></div>
-<div class="logosearchbg">
-    <div class="all">
-        <div class="logo">
-            <a href=""><img src="__IMG__/logo.jpg" alt="" width="200px" height="70px"></a>
-        </div>
-        <div class="navigationbar">
-            <ul>
-                <a href="" class="colorstyle">
-                    <li>首页</li>
-                </a>
-                <a href="">
-                    <li>超值减</li>
-                </a>
-                <a href="">
-                    <li>港货特卖</li>
-                </a>
-                <a href="">
-                    <li>9块9</li>
-                </a>
-                <a href="">
-                    <li>外卖</li>
-                </a>
-                <a href="">
-                    <li>商城返利</li>
-                </a>
-            </ul>
-        </div>
-        <div class="search">
-            <div class="search-text">
-                <form action=" " method="get">
-                    <input type="search" placeholder="  搜索立减" name="" class="search-1">
-                    <div class="searchicon">
-                        <a href=""><i class="icon-search icon-2x"></i></a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="line"></div>
 <div class="all">
-
     <div class="location">
-        <span><a href="">淘货吧</a></span> &nbsp>&nbsp
-        <span><a href="">家居数码</a></span> &nbsp>&nbsp
-        <span><a href="">生活家电</a></span> &nbsp>&nbsp
-        <span><a href="">插线板插座插排 安全可靠</a></span>
+        <volist name="all_goods_class" id="vo">
+            <span><a href="{:U('Goods/index',array('cate'=>$vo['gc_id']))}">{$vo['gc_name']}</a></span> &nbsp>&nbsp
+        </volist>
+        <span><a href="{:U('Goods/detail',array('goods_id'=>$goods['goods_id']))}">{$goods['goods_name']}</a></span>
     </div>
     <div class="left">
         <div class="productdetails">
             <div class="productdetails-m">
                 <div>
-                    <h3>【包邮】<a href=""> 插线板插座插排 安全可靠</a></h3>
+                    <h3><a href="{$goods['goods_external_links']}" target="_blank"> {$goods['goods_name']}</a></h3>
                     <div class="productdetails-1">
-                        <img src="__IMG__/商品1.jpg" alt="" width="280px;">
+                        <img src="__UPLOADS__/{$goods['goods_pic']}" alt="" width="280px;">
                         <div class="pricelist">
-                            <h4 class="pricelist-1">原价 : <span>¥<em>26</em>元</span></h4>
-                            <h4 class="pricelist-2">会员价 : <span>¥<em>26</em> 元<i>10折</i></span></h4>
-                            <h4 class="pricelist-3">剩余时间 : <span>8天10小时9分55秒</span></h4>
-                            <a href=""><h4 class="pricelist-4">去天猫抢购</h4></a>
+                            <h4 class="pricelist-1">原价 : <span>¥<em>{$goods['goods_mkprice']|price_format}</em>元</span></h4>
+                            <h4 class="pricelist-2">会员价 : <span>¥<em>{$goods['goods_price']|price_format}</em> 元<i>10折</i></span></h4>
+                            <a href="{$goods['goods_external_links']}" target="_blank"><h4 class="pricelist-4">去抢购</h4></a>
                         </div>
                     </div>
                     <div class="productdetails-2">

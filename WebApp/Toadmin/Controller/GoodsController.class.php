@@ -715,6 +715,7 @@ class GoodsController extends GlobalController {
 			$data['goods_sort'] = intval($_POST['goods_sort']);
 			$data['goods_body'] = str_replace('\'','&#39;',$_POST['goods_body']);
 			$data['goods_status'] = intval($_POST['goods_status']);
+			$data['goods_external_links'] = trim($_POST['goods_external_links']);
 			$data['add_time'] = NOW_TIME;
 
 			//图片上传
@@ -910,6 +911,7 @@ class GoodsController extends GlobalController {
 			$data['goods_sort'] = intval($_POST['goods_sort']);
 			$data['goods_body'] = str_replace('\'','&#39;',$_POST['goods_body']);
 			$data['goods_status'] = intval($_POST['goods_status']);
+			$data['goods_external_links'] = trim($_POST['goods_external_links']);
 			$data['add_time'] = NOW_TIME;
 			//图片上传
 			if(!empty($_FILES['goods_pic']['name']))

@@ -10,11 +10,6 @@ namespace Common\Model;
 use Think\Model\RelationModel;
 class MemberModel extends RelationModel{
 	protected $_link = array(
-		'AgentInfo' => array(
-			'mapping_type' => self::BELONGS_TO,
-			'class_name' => 'AgentInfo',
-			'mapping_name' => 'AgentInfo',
-			'foreign_key' => 'agent_id',
-		),
+
 	);
 }
