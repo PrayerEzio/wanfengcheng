@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>佐西卡首页</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="site-nav-hd">
+            <div class="col-xs-4  col-md-4 site-nav-logo-hd">
+                <img src="image/logo.png" alt="" width="45%">
+            </div>
+            <div class="col-xs-8  col-md-8">
+                <div class="site-nav-menu-hd">
+                    <span><a href="member.html">Home</a></span>
+                    <span><a href="">About us</a></span>
+                    <span><a href="">保修条款</a></span>
+                    <span><a href="">电商入口</a></span>
+                    <span><a href="">联系我们</a></span>
+                </div>
+                <div class="site-nav-menu-search">
+                    <form action=" " method="get">
+                        <input type="search" name="" class="search-input">
+                        <a href="" class="search-i"><i class="icon-search "></i></a>
+                    </form>
+                </div>
+                <div class="clear"></div>
+                <div class="shop-car">
+                    <a href="order.html"><i class="car-i"></i>
+                        <span><em class="shop-car-colo">0 </em>items(s) - </span>
+                        <span>$<em class="shop-car-colo">0.00</em><i class="icon-angle-down"></i></span></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-12 member-t">
+            <h4>选择支付方式</h4>
+            <div class="row">
+                <div class="col-xs-3 col-md-3">
+                    <div class="add-address">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-6"><p class="name">猪仔</p></div>
+                            <div class="col-xs-6 col-md-6"><p class="home">家</p></div>
+                        </div>
+                        <div class="add-line"></div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="add_information">
+                                    <p>12312312</p>
+                                    <p>天津 河东区 上杭路街道</p>
+                                    <p>小区(邮编)</p>
+                                    <a class="add-a-c" onclick="address_form_show();">编辑</a>
+                                    <a class="add-a-c">删除</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-xs-3 col-md-3">
+                    <div class="add-address add-img" onclick="address_form_show();">
+                        <img src="image/add_cart.png" alt="">
+                        <p>添加新地址</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-12 member-t">
+            <h4>选择支付方式</h4>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 text-1">
+                    <img src="image/zfb_pay.png" alt="" width="8%" class=" choose-pay">
+                    <img src="image/p2.jpg" alt="" width="9%">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-12 member-t">
+            <h4>我的购物车(0)</h4>
+            <div class="row cart-t-bg">
+                <div class="col-xs-5 col-md-5">
+                    <div class="logo-r-cb">
+                        <span>商品名称</span>
+                    </div>
+                </div>
+                <div class="col-xs-7 col-md-7">
+                    <ul class="cart-list">
+                        <li>&nbsp</li>
+                        <li>商品单价</li>
+                        <li>购买数量</li>
+                        <li>折扣价</li>
+                        <li>小计（元）</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row cart-m">
+                <div class="col-xs-5 col-md-5">
+                    <a href="" class="link-c">
+                        <img src="image/mem-c.jpg" alt="" width="8%">
+                        <span class="order-details-m">610 343 5336</span>
+                    </a>
+                </div>
+                <div class="col-xs-7 col-md-7">
+                    <div class="cart-r">
+                        <ul class="cart-list cart-list-1">
+                            <li>&nbsp</li>
+                            <li>1977.03</li>
+                            <li>7</li>
+                            <li>1977.03</li>
+                            <li>13839.21元</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row cart-m">
+                <div class="col-xs-5 col-md-5">
+                    <a href="" class="link-c">
+                        <img src="image/mem-c.jpg" alt="" width="8%">
+                        <span class="order-details-m">610 343 5336</span>
+                    </a>
+                </div>
+                <div class="col-xs-7 col-md-7">
+                    <ul class="cart-list cart-list-1">
+                        <li>&nbsp</li>
+                        <li>1977.03</li>
+                        <li>7</li>
+                        <li>1977.03</li>
+                        <li>13839.21元</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mem-right-line"></div>
+        </div>
+        <div class="row cart-sum">
+            <div class="col-xs-5 col-md-5">
+                <p>订单总额：</p>
+            </div>
+            <div class="col-xs-5 col-md-5">
+                <p>0元</p>
+            </div>
+            <div class="col-xs-8 col-md-5">
+                <div class="logo-r-cb">
+                    <input type="checkbox"><span>使用0积分抵0元：</span>
+                </div>
+            </div>
+            <div class="col-xs-3 col-md-5">
+                <p>0元</p>
+            </div>
+            <div class="clear"></div>
+            <div class="col-xs-5 col-md-5">
+                <p>订单总额：</p>
+            </div>
+            <div class="col-xs-5 col-md-5">
+                <p>0元</p>
+            </div>
+            <div class="col-xs-7 col-md-5 cart-pay">
+                <a href="confirm.html">去结算</a>
+            </div>
+        </div>
+        <div class="col-xs-4 col-md-4">
+            <div class="add-1-bg">
+                <div class="add-1" id="address_form" style="display:none;">
+                    <form action="">
+                        <input type="text" placeholder="收货人姓名" class="add-in">
+                        <input type="text" placeholder="11位手机号码" class="add-in">
+                        <select name="" id="" class="add-in"></select>
+                        <select name="" id="" class="add-in"></select>
+                        <select name="" id="" class="add-in"></select>
+                        <textarea class="from-input2 add-t-c" placeholder="请描述你所需要维修的产品存在的故障"
+                                  required="">					</textarea>
+                        <input type="text" placeholder="邮政编码" class="add-in">
+                        <input type="text" placeholder="地址标签:如'家''公司'" class="add-in">
+                        <input type="button" value="确认" class="add-in add-b-c">
+                        <a onclick="address_form_close();" class="close">×</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="">
+                <div class="footer-option col-md-3 col-xs-3">
+                    <h4>电商入口</h4>
+                    <li><a href=""><i class="icon-eye-open"></i>佐西卡国美店铺</a></li>
+                    <li><a href=""><i class="icon-eye-open"></i>佐西卡京东店铺</a></li>
+                    <li><a href=""><i class="icon-eye-open"></i>佐西卡淘宝企业店</a></li>
+                    <li><a href=""><i class="icon-eye-open"></i>佐西卡阿里巴巴店铺</a></li>
+                </div>
+                <div class="footer-option col-md-2 col-xs-2">
+
+                    <h4>相关信息</h4>
+                    <li><a href="">私隐政策</a></li>
+                    <li><a href="">安全支付</a></li>
+
+                </div>
+                <div class="footer-option col-md-2 col-xs-2">
+                    <h4>新闻中心</h4>
+                    <li><a href="">新闻中心</a></li>
+                    <li><a href="">技术支持</a></li>
+                    <li><a href="">退换货说明</a></li>
+                    <li><a href="">联系我们</a></li>
+                </div>
+                <div class="footer-option col-md-2 col-xs-2">
+                    <h4>我的服务</h4>
+                    <li><a href="">我的账户</a></li>
+                    <li><a href="">历史订单</a></li>
+                    <li><a href="">我的购物车</a></li>
+                </div>
+                <div class="footer-option footer-option-2 col-md-1 col-xs-2">
+                    <h4>社区</h4>
+                    <div class="community-link"><a href="">link in</a> <br/><a>foocebook</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function address_form_close() {
+        $("#address_form").css("display", "none");
+    }
+    function address_form_show() {
+        $("#address_form").css("display", "block");
+    }
+</script>
+</body>
+</html>

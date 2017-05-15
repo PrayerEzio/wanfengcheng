@@ -24,34 +24,26 @@ class OrderController extends BaseController{
 				$this->error('没有选中相关商品');
 			}
 			$goods_ids = $_POST['goods_id'];
-			
-			$goods_id_str = '';
-			foreach ($goods_ids as $key => $goods_id){
-				$goods_id_str .= $goods_id.',';
-			}
-			$goods_id_str = substr($goods_id_str, 0, -1);
-			$list = D('Goods')->where(array('goods_id'=>array('IN',$goods_id_str)))->select();
 			$Cart = new Cart();
 			$cartList = $Cart->getList();
 			$amount = 0;
 			M('OrderGoods')->where(array('order_id'=>0,'member_id'=>$this->mid))->delete();
-			foreach ($list as $key => $val){
-				if (!empty($cartList[$val['goods_id']]['num'])) {
-					if (get_distributor($this->mid)) {
-						$cdisc = MSC('distributor_discount');
-					}else {
-						$cdisc = 1;
-					}
-					$list[$key]['num'] = $cartList[$val['goods_id']]['num'];
-					$list[$key]['goods_price'] = $cdisc*$val['goods_price'];
-					$amount += $cdisc*get_discount($cartList[$val['goods_id']]['num'])*$cartList[$val['goods_id']]['num']*$val['goods_price'];
-					$order_goods['goods_id'] = $val['goods_id'];
-					$order_goods['goods_name'] = $val['goods_name'];
-					$order_goods['goods_price'] = $cdisc*$val['goods_price']*get_discount($cartList[$val['goods_id']]['num']);
-					$order_goods['goods_mkprice'] = $val['goods_price'];
-					$order_goods['goods_num'] = $cartList[$val['goods_id']]['num'];
-					$order_goods['goods_image'] = $val['goods_pic'];
+			foreach ($goods_ids as $key => $goods_id_str){
+				$goods_id_array = explode('_',$goods_id_str);
+				$goods_id = $goods_id_array[0];
+				$spec_id = $goods_id_array[1];
+				if (!empty($cartList[$goods_id][$spec_id]['num'])) {
+					$goods = M('Goods')->where(array('goods_id'=>$goods_id_array[0]))->find();
+					$amount += get_discount($cartList[$goods_id][$spec_id]['num'])*$cartList[$goods_id][$spec_id]['num']*$goods['goods_price'];
+					$order_goods['goods_id'] = $goods['goods_id'];
+					$order_goods['goods_name'] = $goods['goods_name'];
+					$order_goods['goods_price'] = $goods['goods_price']*get_discount($cartList[$goods_id][$spec_id]['num']);
+					$order_goods['goods_mkprice'] = $goods['goods_price'];
+					$order_goods['goods_num'] = $cartList[$goods_id][$spec_id]['num'];
+					$order_goods['goods_image'] = $goods['goods_pic'];
 					$order_goods['member_id'] = $this->mid;
+					$order_goods['spec_id'] = $spec_id;
+					$list[$key] = $order_goods;
 					M('OrderGoods')->add($order_goods);
 				}else {
 					unset($list[$key]);
@@ -59,18 +51,14 @@ class OrderController extends BaseController{
 			}
 			$this->list = $list;
 			$this->amount = $amount;
-			$point = M('Member')->where(array('member_id'=>$this->mid))->getField('point');
-			$use_max_point = $amount*MSC('point_exchange_rate');
-			if ($point >=$use_max_point) {
-				$point = $use_max_point;
-			}
-			$this->point = $point;
 			//收货地址
 			$where['member_id'] = $this->mid;
-			$address = M('MemberAddrs')->where($where)->select();
+			$address = M('MemberAddrs')->where($where)->order('def_addr desc')->select();
 			$dwhere['upid'] = 0;
 			$this->province = M('District')->where($dwhere)->order('d_sort')->select();
 			$this->address = $address;
+			$where['def_addr'] = 1;
+			$this->def_addr_id = M('MemberAddrs')->where($where)->getField('addr_id');
 			$this->display();
 		}else {
 			$this->error('非法操作');
@@ -129,7 +117,7 @@ class OrderController extends BaseController{
 	 * 生成订单
 	 */
 	public function creatOrder(){
-		$addr_id = intval($_POST['addr_id']);
+		$addr_id = intval($_POST['s_addr_id']);
 		$addr_info = M('MemberAddrs')->where(array('addr_id'=>$addr_id))->find();
 		$goods_list = M('OrderGoods')->where(array('order_id'=>0,'member_id'=>$this->mid))->select();
 		if (!empty($addr_info)) {

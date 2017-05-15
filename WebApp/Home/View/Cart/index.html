@@ -20,7 +20,7 @@
                 <volist name="list" id="goods_list">
                     <volist name="goods_list" id="vo">
                         <div class="shopcart-list-tit" id="detail_{$vo['id']}_{$vo['spec_id']}">
-                            <span class="shopcart-all"><input type="checkbox" name="goods_id[]" value="{$vo['id']}" class="nav_s_cart-cb"></span>
+                            <span class="shopcart-all"><input type="checkbox" name="goods_id[]" value="{$vo['id']}_{$vo['spec_id']}" class="nav_s_cart-cb"></span>
                             <a href="{:U('Goods/detail',array('goods_id'=>$vo['id']))}" target="_blank">
                                 <img src="__UPLOADS__/{$vo['img']}" alt="" width="3%"><span class="shopcart-mas">{$vo['name']}</span>
                             </a>

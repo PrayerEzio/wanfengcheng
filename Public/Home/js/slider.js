@@ -15,6 +15,11 @@ $(function() {
 	var curParSize			= "12px";
 
 	var $panels				= $('#slider .scrollContainer > div');
+	console.log($panels);
+	if ($panels.length == 0)
+	{
+		return false;
+	}
 	var $container			= $('#slider .scrollContainer');
 
 	$panels.css({'float' : 'left','position' : 'relative'});
