@@ -28,7 +28,7 @@ class PayController extends Controller{
 				}else {
 					$alipay_data['total_fee'] = $order['order_amount'];//订单总金额
 					$alipay_data['out_trade_no'] = $order['order_sn'];//商户订单ID
-					$alipay_data['subject'] = '佐西卡购物支付';//订单商品标题
+					$alipay_data['subject'] = MSC('site_name').'购物支付';//订单商品标题
 					$alipay_data['body'] = '订单号:'.$order['order_sn'];//订单商品描述
 					$alipay_data['show_url'] = 'http://'.$_SERVER['SERVER_NAME'].U('Member/order',array('sn'=>$order['order_sn']));//订单商品地址
 					$alipay_data['notify_url'] = U('Home/Pay/alipayNotify', '', true, true);
@@ -51,7 +51,7 @@ class PayController extends Controller{
 				}else {
 					$alipay_data['total_fee'] = $order['price'];//订单总金额
 					$alipay_data['out_trade_no'] = $order['rp_sn'];//商户订单ID
-					$alipay_data['subject'] = '佐西卡维修支付';//订单商品标题
+					$alipay_data['subject'] = MSC('site_name').'维修支付';//订单商品标题
 					$alipay_data['body'] = '订单号:'.$order['rp_sn'];//订单商品描述
 					$alipay_data['show_url'] = 'http://'.$_SERVER['SERVER_NAME'].U('Member/progress',array('sn'=>$order['rp_sn']));//订单商品地址
 					$alipay_data['notify_url'] = U('Home/Pay/alipayNotify', array('type'=>'repair'), true, true);
